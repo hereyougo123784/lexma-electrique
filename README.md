@@ -79,7 +79,11 @@ demande et vous l'expédie par courriel.
    C'est gratuit et il n'y a pas de compte à créer.
 2. Dans `index.html`, cherchez `data-cle=""` (une seule occurrence, sur la
    balise `<form>`) et collez la clé entre les guillemets.
-3. Republiez.
+3. **Réglez la durée de conservation à douze mois** dans les paramètres du
+   service. Par défaut il garde une copie des demandes **jusqu'à trois ans**,
+   alors que la politique de confidentialité en promet douze mois. Sans ce
+   réglage, la politique est fausse.
+4. Republiez.
 
 À partir de là, une demande arrive directement dans votre boîte, le visiteur
 voit « C'est envoyé. » sans quitter la page, et si vous répondez au courriel,
@@ -108,6 +112,11 @@ Elle a été réécrite en même temps. Elle décrivait un formulaire qui « ne
 transmet rien à un serveur », ce qui cesserait d'être vrai le jour où vous
 collez la clé. Elle décrit maintenant les deux chemins et nomme le service de
 relais parmi les tiers qui voient passer vos demandes.
+
+Elle annonce aussi, à la section 8, que la copie détenue par le relais est
+conservée douze mois. **C'est à vous de le régler** (étape 3 ci-dessus) :
+c'est une phrase de la politique qui dépend d'un réglage chez un tiers, et
+personne ne s'en apercevra si elle devient fausse.
 
 ## La barre d'appel sur téléphone
 
