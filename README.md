@@ -5,6 +5,28 @@ Saint-Ambroise, membre de la CMEQ. Page unique en défilement, construite avec
 le skill [scroll-craft](../../../.agents/skills/scroll-craft/SKILL.md) :
 HTML, CSS et JavaScript purs, sans framework ni étape de build.
 
+## Mise en ligne
+
+Le site vit dans le dépôt `claude-webb`, sous
+`scrollcraft/builds/lexma-electrique/`, et il est publié dans son **propre
+dépôt** où il occupe la racine, ce dont GitHub Pages a besoin. Il n'y a pas
+de copie : le dossier de travail reste la seule source, et `git subtree`
+republie ce qu'il contient.
+
+**La première fois**, créer un dépôt GitHub vide nommé `lexma-electrique`,
+sans README, sans .gitignore, sans licence. Puis :
+
+```bash
+git -C /Users/jg/claude subtree push --prefix=scrollcraft/builds/lexma-electrique lexma main
+```
+
+Ensuite, dans le dépôt sur GitHub : Settings → Pages → Source « Deploy from a
+branch » → Branch `main`, dossier `/ (root)` → Save. Le site paraît à
+`https://hereyougo123784.github.io/lexma-electrique/` en une minute ou deux.
+
+**Ensuite**, à chaque modification, c'est la même commande. Le dépôt distant
+`lexma` est déjà configuré.
+
 ## Lancer en local
 
 Aucune dépendance à installer. Servez le dossier :
