@@ -65,16 +65,49 @@ lumière. L'électricien du camion ne porte aucun logo. Détail dans
 ## La demande de soumission
 
 La section « Envoyez-nous votre projet » recueille nom, téléphone, courriel,
-adresse des travaux, type de travaux et description. À l'envoi, **le logiciel
-de courriel du visiteur s'ouvre avec le message déjà rédigé**, adressé à
-`gestion@lexma-electrique.com`. Il n'y a pas de serveur derrière le site, donc
-rien n'est promis qui ne soit tenu : le visiteur voit ce qui part, il peut y
-joindre ses photos, et il en garde une copie dans ses envois.
+adresse des travaux, type de travaux et description. Le formulaire a **deux
+chemins**, et il choisit tout seul.
 
-**Pour recevoir les demandes directement dans votre boîte, sans passer par le
-logiciel du visiteur**, il faut un service de formulaire. Une clé gratuite chez
-[web3forms.com](https://web3forms.com) suffit, et le bloc de script en bas de
-`index.html` est écrit pour accueillir cet ajout. Dites-le-moi et je le branche.
+### 1. L'envoi direct, à activer en une minute
+
+Le site est un dossier de fichiers statiques : il n'a pas de serveur pour
+recevoir un formulaire. Il passe donc par un service de relais, qui reçoit la
+demande et vous l'expédie par courriel.
+
+1. Allez sur [web3forms.com](https://web3forms.com), entrez
+   `gestion@lexma-electrique.com`, et recevez une clé d'accès par courriel.
+   C'est gratuit et il n'y a pas de compte à créer.
+2. Dans `index.html`, cherchez `data-cle=""` (une seule occurrence, sur la
+   balise `<form>`) et collez la clé entre les guillemets.
+3. Republiez.
+
+À partir de là, une demande arrive directement dans votre boîte, le visiteur
+voit « C'est envoyé. » sans quitter la page, et si vous répondez au courriel,
+la réponse part vers l'adresse du client.
+
+La clé est visible dans le code source de la page, et c'est normal : elle ne
+permet d'envoyer qu'à l'adresse que vous avez vérifiée. Elle ne donne accès à
+rien.
+
+### 2. Le filet, qui marche déjà
+
+Tant que la clé n'est pas collée, ou si le service est en panne, la page
+compose le courriel et l'ouvre dans la messagerie du visiteur, qui l'envoie
+lui-même. C'est le comportement actuel. **Une demande ne se perd jamais parce
+qu'un service tiers est tombé.**
+
+### Contre les robots
+
+Un champ piège, hors de l'écran et retiré du parcours au clavier, est présent
+dans le code. Un programme qui remplit tout ce qu'il trouve se dénonce en le
+remplissant : la page fait alors semblant d'accepter et n'envoie rien.
+
+### Et la politique de confidentialité
+
+Elle a été réécrite en même temps. Elle décrivait un formulaire qui « ne
+transmet rien à un serveur », ce qui cesserait d'être vrai le jour où vous
+collez la clé. Elle décrit maintenant les deux chemins et nomme le service de
+relais parmi les tiers qui voient passer vos demandes.
 
 ## La barre d'appel sur téléphone
 

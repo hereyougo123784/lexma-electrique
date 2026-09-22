@@ -526,6 +526,29 @@
   .lx-submit { border: 0; cursor: pointer; font-size: var(--sc-t-lg); }
   .lx-form__note { margin: 0; max-width: 34ch; color: var(--sc-ink-soft); font-size: var(--sc-t-sm); }
   .lx-form__erreur { margin: 0; color: #FF6B5A; font-size: var(--sc-t-sm); }
+  .lx-submit[disabled] { opacity: 0.6; cursor: progress; }
+  /* Hors de l'ecran plutot que display:none : un robot qui lit le DOM le
+     trouve et le remplit, un lecteur d'ecran l'ignore grace a aria-hidden,
+     et tabindex -1 le sort du parcours au clavier. */
+  .lx-pot {
+    position: absolute; left: -9999px;
+    width: 1px; height: 1px; overflow: hidden;
+  }
+  .lx-merci {
+    margin-top: var(--sc-8);
+    padding: var(--sc-6) var(--sc-7);
+    border-left: 3px solid var(--sc-accent);
+    background: color-mix(in oklab, var(--sc-ink) 5%, transparent);
+    border-radius: 0 var(--sc-r-md) var(--sc-r-md) 0;
+    max-width: 46rem;
+  }
+  .lx-merci p { margin: 0; color: var(--sc-ink-soft); }
+  .lx-merci__titre {
+    font-family: var(--sc-font-display); font-weight: 900;
+    font-size: var(--sc-t-xl); letter-spacing: var(--sc-track-snug);
+    color: var(--sc-ink) !important; margin-bottom: var(--sc-3) !important;
+  }
+  .lx-merci a { color: var(--sc-ink); text-decoration-color: var(--sc-accent); text-decoration-thickness: 2px; }
   .lx-devis__sinon {
     margin: var(--sc-8) 0 0; padding-top: var(--sc-5);
     border-top: 1px solid var(--sc-hairline);
@@ -842,7 +865,10 @@
         <p class="sc-lede lx-devis__lede">Décrivez les travaux, joignez vos photos, et on vous revient avec une soumission.</p>
       </div>
 
-      <form class="lx-form" data-sc-in novalidate>
+      <!-- data-cle : collez ici la cle recue de web3forms.com et le formulaire
+           envoie vraiment. Vide, il retombe sur le courriel pre-redige, qui
+           marche depuis toujours. Rien d'autre a changer. -->
+      <form class="lx-form" data-sc-in novalidate data-cle="">
         <div class="lx-field">
           <label for="f-nom">Nom</label>
           <input id="f-nom" name="nom" type="text" autocomplete="name" required>
@@ -884,12 +910,24 @@
           <textarea id="f-projet" name="projet" rows="5" maxlength="1500" required
             placeholder="Ce que vous voulez faire, l'âge de la maison, ce qui vous inquiète, les délais."></textarea>
         </div>
+        <!-- Piege a robots. Invisible a l'oeil et retire du parcours au
+             clavier, mais present dans le DOM : un programme qui remplit tout
+             ce qu'il trouve se denonce en le remplissant. -->
+        <label class="lx-pot" aria-hidden="true">
+          Ne remplissez pas ce champ
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+        </label>
         <div class="lx-form__pied">
           <button class="lx-tel lx-submit" type="submit">Envoyer la demande</button>
-          <p class="lx-form__note">Votre logiciel de courriel s'ouvre avec la demande déjà écrite. Ajoutez-y vos photos avant d'envoyer.</p>
+          <p class="lx-form__note">Ajoutez vos photos en pièce jointe si vous en avez.</p>
         </div>
         <p class="lx-form__erreur" role="alert" hidden></p>
       </form>
+
+      <div class="lx-merci" role="status" hidden>
+        <p class="lx-merci__titre">C'est envoyé.</p>
+        <p>Votre demande est partie à gestion@lexma-electrique.com. Vous aurez une réponse au plus vite. Si c'est pressé, appelez au <a href="tel:+14507567111">450 756-7111</a>.</p>
+      </div>
 
       <p class="lx-devis__sinon" data-sc-in>Ou écrivez directement à <a href="mailto:gestion@lexma-electrique.com">gestion@lexma-electrique.com</a>, ou appelez au <a href="tel:+14507567111">450 756-7111</a>.<br>
         <span class="lx-devis__legal">Ce que nous faisons de vos renseignements : <a href="confidentialite.html">politique de confidentialité</a>. Ce site ne dépose aucun témoin.</span></p>
@@ -960,12 +998,17 @@ ScrollCraft.mount(document.body);
 /* --------------------------------------------------------------------------
    La demande de soumission.
 
-   Le site est un dossier de fichiers statiques : il n'y a pas de serveur pour
-   recevoir un POST. Plutot que de promettre un envoi qui n'arriverait nulle
-   part, ou de faire transiter les coordonnees d'un client par un service
-   tiers sans qu'il le sache, la page compose le courriel et le remet au
-   logiciel de messagerie du visiteur. Il voit ce qui part, il peut y joindre
-   ses photos, et il garde une copie dans ses envois.
+   Deux chemins, et c'est voulu.
+
+   1. `data-cle` remplie : le formulaire part vraiment, par POST vers le
+      service de relais, et la demande arrive dans la boite de Lexma sans que
+      le visiteur ait a ouvrir son logiciel de courriel. C'est le comportement
+      normal une fois le site en ligne.
+
+   2. `data-cle` vide, ou l'envoi echoue : la page compose le courriel et le
+      remet au logiciel de messagerie du visiteur. Ce chemin existait avant le
+      service de relais et il reste le filet. Une demande ne doit jamais se
+      perdre parce qu'un service tiers est en panne.
 
    La validation est faite a la main parce que le formulaire porte `novalidate`
    pour garder la main sur le message d'erreur, en francais et a un seul
@@ -974,25 +1017,61 @@ ScrollCraft.mount(document.body);
 (function () {
   var form = document.querySelector('.lx-form');
   if (!form) return;
-  var erreur = form.querySelector('.lx-form__erreur');
-  var DEST = 'gestion@lexma-electrique.com';
+  var erreur  = form.querySelector('.lx-form__erreur');
+  var bouton  = form.querySelector('.lx-submit');
+  var merci   = document.querySelector('.lx-merci');
+  var DEST    = 'gestion@lexma-electrique.com';
+  var RELAIS  = 'https://api.web3forms.com/submit';
+
+  var REQUIS = [
+    ['nom',    'votre nom'],
+    ['tel',    'votre téléphone'],
+    ['projet', 'une description du projet']
+  ];
 
   function valeur(nom) {
     var el = form.elements[nom];
     return el ? el.value.trim() : '';
   }
 
+  function corps() {
+    return [
+      'Nom : ' + valeur('nom'),
+      'Téléphone : ' + valeur('tel'),
+      'Courriel : ' + (valeur('courriel') || 'non fourni'),
+      'Adresse des travaux : ' + (valeur('adresse') || 'non fournie'),
+      'Type de travaux : ' + valeur('type'),
+      '',
+      'Le projet :',
+      valeur('projet')
+    ].join('\n');
+  }
+
+  function sujet() {
+    return 'Demande de soumission · ' + valeur('type') + ' · ' + valeur('nom');
+  }
+
+  function parCourriel(note) {
+    /* Le filet. On previent avant de changer de fenetre : une application de
+       messagerie qui s'ouvre sans explication ressemble a un bogue. */
+    if (note) { erreur.textContent = note; erreur.hidden = false; }
+    window.location.href = 'mailto:' + DEST +
+      '?subject=' + encodeURIComponent(sujet()) +
+      '&body=' + encodeURIComponent(corps() +
+        '\n\n(Pensez à joindre vos photos à ce courriel avant de l\'envoyer.)');
+  }
+
+  function montrerMerci() {
+    form.hidden = true;
+    merci.hidden = false;
+    merci.setAttribute('tabindex', '-1');
+    merci.focus({ preventScroll: true });
+    merci.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    /* Les noms sont ecrits ici, pas deduits des etiquettes : « Votre projet »
-       donnerait « il manque votre votre projet ». Une phrase qui se lit mal
-       est une phrase qu'on croit moins. */
-    var REQUIS = [
-      ['nom',    'votre nom'],
-      ['tel',    'votre téléphone'],
-      ['projet', 'une description du projet']
-    ];
     var manquants = [], premierVide = null;
     REQUIS.forEach(function (paire) {
       var el = form.elements[paire[0]];
@@ -1012,23 +1091,48 @@ ScrollCraft.mount(document.body);
     }
     erreur.hidden = true;
 
-    var lignes = [
-      'Nom : ' + valeur('nom'),
-      'Téléphone : ' + valeur('tel'),
-      'Courriel : ' + (valeur('courriel') || 'non fourni'),
-      'Adresse des travaux : ' + (valeur('adresse') || 'non fournie'),
-      'Type de travaux : ' + valeur('type'),
-      '',
-      'Le projet :',
-      valeur('projet'),
-      '',
-      '(Pensez à joindre vos photos à ce courriel avant de l\'envoyer.)'
-    ];
+    /* Le piege a robots : un humain ne peut pas cocher une case placee hors de
+       l'ecran et retiree du parcours au clavier. On fait semblant d'accepter
+       plutot que de refuser, pour ne rien apprendre au programme. */
+    if (form.elements.botcheck && form.elements.botcheck.checked) {
+      montrerMerci();
+      return;
+    }
 
-    var sujet = 'Demande de soumission · ' + valeur('type') + ' · ' + valeur('nom');
-    window.location.href = 'mailto:' + DEST +
-      '?subject=' + encodeURIComponent(sujet) +
-      '&body=' + encodeURIComponent(lignes.join('\n'));
+    var cle = (form.getAttribute('data-cle') || '').trim();
+    if (!cle || !window.fetch) { parCourriel(); return; }
+
+    var etiquette = bouton.textContent;
+    bouton.disabled = true;
+    bouton.textContent = 'Envoi en cours…';
+
+    fetch(RELAIS, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: cle,
+        subject: sujet(),
+        from_name: 'Site Lexma Électrique',
+        replyto: valeur('courriel') || undefined,
+        nom: valeur('nom'),
+        telephone: valeur('tel'),
+        courriel: valeur('courriel') || 'non fourni',
+        adresse_des_travaux: valeur('adresse') || 'non fournie',
+        type_de_travaux: valeur('type'),
+        projet: valeur('projet'),
+        message: corps()
+      })
+    })
+      .then(function (r) { return r.json().catch(function () { return {}; }); })
+      .then(function (d) {
+        if (d && d.success) { montrerMerci(); return; }
+        throw new Error('refus du service');
+      })
+      .catch(function () {
+        bouton.disabled = false;
+        bouton.textContent = etiquette;
+        parCourriel("L'envoi direct n'a pas fonctionné. Votre logiciel de courriel s'ouvre avec la demande déjà écrite.");
+      });
   });
 
   /* Le message d'erreur disparait des que la personne corrige : le laisser
