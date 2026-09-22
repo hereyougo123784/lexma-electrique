@@ -865,29 +865,43 @@
         <p class="sc-lede lx-devis__lede">Décrivez les travaux, joignez vos photos, et on vous revient avec une soumission.</p>
       </div>
 
-      <!-- data-cle : collez ici la cle recue de web3forms.com et le formulaire
-           envoie vraiment. Vide, il retombe sur le courriel pre-redige, qui
-           marche depuis toujours. Rien d'autre a changer. -->
-      <form class="lx-form" data-sc-in novalidate data-cle="">
+      <!-- Le formulaire poste vers FormSubmit, qui expedie la demande a
+           l'adresse du chemin. Un envoi classique, pas d'AJAX : c'est ce
+           qu'ils documentent, et surtout ca marche meme si le JavaScript ne
+           charge pas. Le script au bas de la page ne fait qu'ameliorer.
+           Pour changer de destinataire, il y a un seul endroit : l'attribut
+           action ci-dessous. -->
+      <form class="lx-form" data-sc-in novalidate method="POST"
+            action="https://formsubmit.co/gestion@lexma-electrique.com">
+
+        <!-- Reglages FormSubmit. _next est reecrit au chargement pour pointer
+             vers la page courante, quel que soit le domaine final. -->
+        <input type="hidden" name="_subject" value="Demande de soumission · site Lexma">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://hereyougo123784.github.io/lexma-electrique/?envoye=1">
+
         <div class="lx-field">
           <label for="f-nom">Nom</label>
           <input id="f-nom" name="nom" type="text" autocomplete="name" required>
         </div>
         <div class="lx-field">
           <label for="f-tel">Téléphone</label>
-          <input id="f-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" required>
+          <input id="f-tel" name="telephone" type="tel" inputmode="tel" autocomplete="tel" required>
         </div>
         <div class="lx-field">
+          <!-- Le champ doit s'appeler « email » : FormSubmit s'en sert pour le
+               Reply-To, donc repondre au courriel repond au client. -->
           <label for="f-courriel">Courriel <span class="lx-opt">facultatif</span></label>
-          <input id="f-courriel" name="courriel" type="email" autocomplete="email">
+          <input id="f-courriel" name="email" type="email" autocomplete="email">
         </div>
         <div class="lx-field">
           <label for="f-adresse">Adresse des travaux</label>
-          <input id="f-adresse" name="adresse" type="text" autocomplete="street-address">
+          <input id="f-adresse" name="adresse_des_travaux" type="text" autocomplete="street-address">
         </div>
         <div class="lx-field lx-field--large">
           <label for="f-type">Type de travaux</label>
-          <select id="f-type" name="type">
+          <select id="f-type" name="type_de_travaux">
             <option>Je ne sais pas encore</option>
             <optgroup label="Résidentiel">
               <option>Panneau électrique</option>
@@ -908,25 +922,27 @@
         <div class="lx-field lx-field--large">
           <label for="f-projet">Votre projet</label>
           <textarea id="f-projet" name="projet" rows="5" maxlength="1500" required
-            placeholder="Ce que vous voulez faire, l'âge de la maison, ce qui vous inquiète, les délais."></textarea>
+            placeholder="Ce que vous voulez faire, l'âge de la maison ou du local, ce qui vous inquiète, les délais."></textarea>
         </div>
-        <!-- Piege a robots. Invisible a l'oeil et retire du parcours au
-             clavier, mais present dans le DOM : un programme qui remplit tout
-             ce qu'il trouve se denonce en le remplissant. -->
+
+        <!-- Piege a robots de FormSubmit. Invisible a l'oeil, retire du
+             parcours au clavier, mais present dans le DOM : un programme qui
+             remplit tout ce qu'il trouve se denonce en le remplissant. -->
         <label class="lx-pot" aria-hidden="true">
           Ne remplissez pas ce champ
-          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off">
         </label>
+
         <div class="lx-form__pied">
           <button class="lx-tel lx-submit" type="submit">Envoyer la demande</button>
-          <p class="lx-form__note">Ajoutez vos photos en pièce jointe si vous en avez.</p>
+          <p class="lx-form__note">Ajoutez vos photos en pièce jointe par courriel si vous en avez.</p>
         </div>
         <p class="lx-form__erreur" role="alert" hidden></p>
       </form>
 
       <div class="lx-merci" role="status" hidden>
         <p class="lx-merci__titre">C'est envoyé.</p>
-        <p>Votre demande est partie à gestion@lexma-electrique.com. Vous aurez une réponse au plus vite. Si c'est pressé, appelez au <a href="tel:+14507567111">450 756-7111</a>.</p>
+        <p>Votre demande est partie. Vous aurez une réponse au plus vite. Si c'est pressé, appelez au <a href="tel:+14507567111">450 756-7111</a>.</p>
       </div>
 
       <p class="lx-devis__sinon" data-sc-in>Ou écrivez directement à <a href="mailto:gestion@lexma-electrique.com">gestion@lexma-electrique.com</a>, ou appelez au <a href="tel:+14507567111">450 756-7111</a>.<br>
@@ -998,68 +1014,57 @@ ScrollCraft.mount(document.body);
 /* --------------------------------------------------------------------------
    La demande de soumission.
 
-   Deux chemins, et c'est voulu.
+   Le formulaire est un vrai formulaire : il a une action, une methode, et il
+   part tout seul si ce script ne charge pas. Tout ce qui suit n'est qu'une
+   amelioration, et c'est le bon sens dans lequel prendre le risque quand le
+   contenu en jeu est une demande de client.
 
-   1. `data-cle` remplie : le formulaire part vraiment, par POST vers le
-      service de relais, et la demande arrive dans la boite de Lexma sans que
-      le visiteur ait a ouvrir son logiciel de courriel. C'est le comportement
-      normal une fois le site en ligne.
-
-   2. `data-cle` vide, ou l'envoi echoue : la page compose le courriel et le
-      remet au logiciel de messagerie du visiteur. Ce chemin existait avant le
-      service de relais et il reste le filet. Une demande ne doit jamais se
-      perdre parce qu'un service tiers est en panne.
-
-   La validation est faite a la main parce que le formulaire porte `novalidate`
-   pour garder la main sur le message d'erreur, en francais et a un seul
-   endroit plutot qu'en bulles natives.
+   Trois choses seulement :
+     1. la validation, en francais et a un seul endroit, parce que le
+        formulaire porte `novalidate` pour eviter les bulles natives ;
+     2. `_next` pointe vers la page courante, quel que soit le domaine, pour
+        que le retour apres envoi ne depende pas d'une URL ecrite en dur ;
+     3. le retour justement : `?envoye=1` remplace le formulaire par un mot
+        de confirmation, et l'adresse est nettoyee pour qu'un rechargement ne
+        reaffiche pas le message.
    -------------------------------------------------------------------------- */
 (function () {
   var form = document.querySelector('.lx-form');
-  if (!form) return;
-  var erreur  = form.querySelector('.lx-form__erreur');
-  var bouton  = form.querySelector('.lx-submit');
-  var merci   = document.querySelector('.lx-merci');
-  var DEST    = 'gestion@lexma-electrique.com';
-  var RELAIS  = 'https://api.web3forms.com/submit';
+  var merci = document.querySelector('.lx-merci');
+  if (!form || !merci) return;
+  var erreur = form.querySelector('.lx-form__erreur');
+  var bouton = form.querySelector('.lx-submit');
 
+  /* --- 1. le retour apres envoi ---------------------------------------- */
+  if (/[?&]envoye=1(&|$)/.test(location.search)) {
+    form.hidden = true;
+    merci.hidden = false;
+    if (history.replaceState) {
+      var propre = location.pathname +
+        location.search.replace(/([?&])envoye=1(&|$)/, '$1').replace(/[?&]$/, '');
+      history.replaceState(null, '', propre + '#soumission');
+    }
+    merci.setAttribute('tabindex', '-1');
+    merci.focus({ preventScroll: true });
+  }
+
+  /* --- 2. le retour pointe vers cette page, pas vers une URL figee ------ */
+  var suivant = form.elements._next;
+  if (suivant) {
+    suivant.value = location.origin + location.pathname + '?envoye=1';
+  }
+
+  /* --- 3. la validation ------------------------------------------------- */
   var REQUIS = [
-    ['nom',    'votre nom'],
-    ['tel',    'votre téléphone'],
-    ['projet', 'une description du projet']
+    ['nom',        'votre nom'],
+    ['telephone',  'votre téléphone'],
+    ['projet',     'une description du projet']
   ];
 
-  function valeur(nom) {
-    var el = form.elements[nom];
-    return el ? el.value.trim() : '';
-  }
-
-  function corps() {
-    return [
-      'Nom : ' + valeur('nom'),
-      'Téléphone : ' + valeur('tel'),
-      'Courriel : ' + (valeur('courriel') || 'non fourni'),
-      'Adresse des travaux : ' + (valeur('adresse') || 'non fournie'),
-      'Type de travaux : ' + valeur('type'),
-      '',
-      'Le projet :',
-      valeur('projet')
-    ].join('\n');
-  }
-
-  function sujet() {
-    return 'Demande de soumission · ' + valeur('type') + ' · ' + valeur('nom');
-  }
-
-  function parCourriel(note) {
-    /* Le filet. On previent avant de changer de fenetre : une application de
-       messagerie qui s'ouvre sans explication ressemble a un bogue. */
-    if (note) { erreur.textContent = note; erreur.hidden = false; }
-    window.location.href = 'mailto:' + DEST +
-      '?subject=' + encodeURIComponent(sujet()) +
-      '&body=' + encodeURIComponent(corps() +
-        '\n\n(Pensez à joindre vos photos à ce courriel avant de l\'envoyer.)');
-  }
+  /* L'adresse n'est ecrite qu'une fois, dans l'attribut action. On la relit
+     ici plutot que de la repeter : deux copies d'une adresse courriel, c'est
+     une copie qui sera oubliee le jour ou l'autre change. */
+  var DEST = (form.getAttribute('action') || '').split('/').pop();
 
   function montrerMerci() {
     form.hidden = true;
@@ -1070,8 +1075,6 @@ ScrollCraft.mount(document.body);
   }
 
   form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
     var manquants = [], premierVide = null;
     REQUIS.forEach(function (paire) {
       var el = form.elements[paire[0]];
@@ -1081,6 +1084,7 @@ ScrollCraft.mount(document.body);
       }
     });
     if (manquants.length) {
+      e.preventDefault();
       var liste = manquants.length === 1
         ? manquants[0]
         : manquants.slice(0, -1).join(', ') + ' et ' + manquants[manquants.length - 1];
@@ -1091,52 +1095,42 @@ ScrollCraft.mount(document.body);
     }
     erreur.hidden = true;
 
-    /* Le piege a robots : un humain ne peut pas cocher une case placee hors de
-       l'ecran et retiree du parcours au clavier. On fait semblant d'accepter
-       plutot que de refuser, pour ne rien apprendre au programme. */
-    if (form.elements.botcheck && form.elements.botcheck.checked) {
-      montrerMerci();
+    /* Sans fetch ni FormData, on laisse partir l'envoi natif : le formulaire
+       a une vraie action, il n'a jamais eu besoin de ce script pour marcher. */
+    if (!window.fetch || !window.FormData) {
+      bouton.disabled = true;
+      bouton.textContent = 'Envoi en cours…';
       return;
     }
 
-    var cle = (form.getAttribute('data-cle') || '').trim();
-    if (!cle || !window.fetch) { parCourriel(); return; }
-
-    var etiquette = bouton.textContent;
+    e.preventDefault();
     bouton.disabled = true;
     bouton.textContent = 'Envoi en cours…';
 
-    fetch(RELAIS, {
+    var donnees = new FormData(form);
+    donnees.delete('_next');   /* inutile en AJAX : on ne quitte pas la page */
+
+    fetch('https://formsubmit.co/ajax/' + encodeURIComponent(DEST), {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        access_key: cle,
-        subject: sujet(),
-        from_name: 'Site Lexma Électrique',
-        replyto: valeur('courriel') || undefined,
-        nom: valeur('nom'),
-        telephone: valeur('tel'),
-        courriel: valeur('courriel') || 'non fourni',
-        adresse_des_travaux: valeur('adresse') || 'non fournie',
-        type_de_travaux: valeur('type'),
-        projet: valeur('projet'),
-        message: corps()
-      })
+      body: donnees,
+      headers: { Accept: 'application/json' }
     })
-      .then(function (r) { return r.json().catch(function () { return {}; }); })
-      .then(function (d) {
-        if (d && d.success) { montrerMerci(); return; }
-        throw new Error('refus du service');
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (res.success !== true && res.success !== 'true') {
+          throw new Error(res.message || 'refus du service');
+        }
+        montrerMerci();
       })
       .catch(function () {
-        bouton.disabled = false;
-        bouton.textContent = etiquette;
-        parCourriel("L'envoi direct n'a pas fonctionné. Votre logiciel de courriel s'ouvre avec la demande déjà écrite.");
+        /* Le chemin AJAX a echoue. Le formulaire a une action et une methode :
+           on laisse le navigateur l'envoyer comme il l'aurait fait sans
+           script. form.submit() ne redeclenche pas cet ecouteur, donc pas de
+           boucle. */
+        form.submit();
       });
   });
 
-  /* Le message d'erreur disparait des que la personne corrige : le laisser
-     affiche pendant qu'elle tape est une facon de la punir deux fois. */
   form.addEventListener('input', function () {
     if (!erreur.hidden) erreur.hidden = true;
   });

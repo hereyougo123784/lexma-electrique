@@ -65,58 +65,63 @@ lumière. L'électricien du camion ne porte aucun logo. Détail dans
 ## La demande de soumission
 
 La section « Envoyez-nous votre projet » recueille nom, téléphone, courriel,
-adresse des travaux, type de travaux et description. Le formulaire a **deux
-chemins**, et il choisit tout seul.
+adresse des travaux, type de travaux et description, et l'envoie à
+`gestion@lexma-electrique.com` **par FormSubmit** — le même service que le
+site JG AGENCY.
 
-### 1. L'envoi direct, à activer en une minute
+### Un seul geste, et il est à faire une fois
 
-Le site est un dossier de fichiers statiques : il n'a pas de serveur pour
-recevoir un formulaire. Il passe donc par un service de relais, qui reçoit la
-demande et vous l'expédie par courriel.
+FormSubmit n'a ni compte ni clé. En revanche, **la première demande envoyée
+déclenche un courriel de confirmation** à `gestion@lexma-electrique.com`, avec
+un lien à cliquer. Tant que ce lien n'est pas cliqué, les demandes suivantes
+n'arrivent pas.
 
-1. Allez sur [web3forms.com](https://web3forms.com), entrez
-   `gestion@lexma-electrique.com`, et recevez une clé d'accès par courriel.
-   C'est gratuit et il n'y a pas de compte à créer.
-2. Dans `index.html`, cherchez `data-cle=""` (une seule occurrence, sur la
-   balise `<form>`) et collez la clé entre les guillemets.
-3. **Réglez la durée de conservation à douze mois** dans les paramètres du
-   service. Par défaut il garde une copie des demandes **jusqu'à trois ans**,
-   alors que la politique de confidentialité en promet douze mois. Sans ce
-   réglage, la politique est fausse.
-4. Republiez.
+Une fois le site en ligne : remplissez le formulaire une fois vous-même,
+ouvrez la boîte, cliquez le lien. C'est fini pour toujours.
 
-À partir de là, une demande arrive directement dans votre boîte, le visiteur
-voit « C'est envoyé. » sans quitter la page, et si vous répondez au courriel,
-la réponse part vers l'adresse du client.
+### Changer le destinataire
 
-La clé est visible dans le code source de la page, et c'est normal : elle ne
-permet d'envoyer qu'à l'adresse que vous avez vérifiée. Elle ne donne accès à
-rien.
+Un seul endroit, l'attribut `action` de la balise `<form>` dans `index.html` :
 
-### 2. Le filet, qui marche déjà
+```html
+<form class="lx-form" method="POST"
+      action="https://formsubmit.co/gestion@lexma-electrique.com">
+```
 
-Tant que la clé n'est pas collée, ou si le service est en panne, la page
-compose le courriel et l'ouvre dans la messagerie du visiteur, qui l'envoie
-lui-même. C'est le comportement actuel. **Une demande ne se perd jamais parce
-qu'un service tiers est tombé.**
+Le script relit cette adresse ; il n'y a pas de deuxième copie à synchroniser.
+Pour envoyer à plusieurs personnes, ne touchez pas au formulaire : gardez une
+seule adresse et faites une redirection ou un alias chez le fournisseur de
+courriel. Le jour où quelqu'un s'ajoute ou s'en va, ça se règle dans la boîte
+courriel et pas dans le code du site.
+
+### Deux chemins, et le second est un vrai filet
+
+Le formulaire a une `action` et une `method` : **c'est un vrai formulaire**, il
+part tout seul si le JavaScript ne charge pas. Le script ne fait qu'améliorer.
+
+- **Avec JavaScript** : envoi en arrière-plan, la confirmation s'affiche sans
+  quitter la page.
+- **Sans JavaScript, ou si l'envoi en arrière-plan échoue** : le navigateur
+  poste le formulaire comme il l'a toujours fait, FormSubmit renvoie le
+  visiteur sur la page avec `?envoye=1`, et la confirmation s'affiche pareil.
 
 ### Contre les robots
 
-Un champ piège, hors de l'écran et retiré du parcours au clavier, est présent
-dans le code. Un programme qui remplit tout ce qu'il trouve se dénonce en le
-remplissant : la page fait alors semblant d'accepter et n'envoie rien.
+Le champ piège `_honey`, hors de l'écran et retiré du parcours au clavier, est
+celui que FormSubmit attend. Un programme qui remplit tout se dénonce en le
+remplissant.
 
-### Et la politique de confidentialité
+### Ce que la politique de confidentialité en dit
 
-Elle a été réécrite en même temps. Elle décrivait un formulaire qui « ne
-transmet rien à un serveur », ce qui cesserait d'être vrai le jour où vous
-collez la clé. Elle décrit maintenant les deux chemins et nomme le service de
-relais parmi les tiers qui voient passer vos demandes.
+Elle nomme FormSubmit et décrit ce que sa politique dit — et ce qu'elle ne dit
+pas. **Elle ne fixe aucune durée de conservation** et le service n'offre aucun
+réglage pour en imposer une. La politique l'écrit franchement plutôt que de
+promettre ce qu'on ne contrôle pas, et propose au visiteur d'écrire ou
+d'appeler directement s'il préfère rester hors de ce circuit.
 
-Elle annonce aussi, à la section 8, que la copie détenue par le relais est
-conservée douze mois. **C'est à vous de le régler** (étape 3 ci-dessus) :
-c'est une phrase de la politique qui dépend d'un réglage chez un tiers, et
-personne ne s'en apercevra si elle devient fausse.
+Si cette absence de durée vous dérange, Web3Forms annonce une conservation
+réglable (jusqu'à trois ans par défaut) en échange d'une clé à demander. Dites-
+le-moi et je rebranche.
 
 ## La barre d'appel sur téléphone
 
