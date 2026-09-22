@@ -1,0 +1,1042 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Électricien résidentiel et commercial · Saint-Ambroise-de-Kildare</title>
+<meta name="description" content="Électricien résidentiel et commercial à Saint-Ambroise-de-Kildare. Panneaux, filage, éclairage, mise aux normes. Membre de la CMEQ, RBQ 5767-5993-01.">
+<meta name="theme-color" content="#0A0D14">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230A0D14'/><path d='M18.6 4 11 17.4h5.1L13.4 28 21 14.6h-5.1z' fill='%23FFD21A'/></svg>">
+<link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+  /* ------------------------------------------------------- polices --
+     Archivo et Geist sont servies depuis ce dossier, pas depuis le CDN
+     de Google. Un lien vers ce CDN transmet l'adresse IP et le
+     navigateur de chaque visiteur a un tiers : c'etait le seul
+     transfert de donnees de tout le site, et la seule chose que la
+     politique de confidentialite aurait eu a declarer. Les deux
+     familles sont sous licence libre (OFL), donc les heberger soi-meme
+     est permis. Seul le latin est embarque : le francais n'a besoin de
+     rien d'autre, et ca fait une requete externe de moins.
+     -------------------------------------------------------------- */
+  @font-face {
+    font-family: 'Archivo';
+    font-style: normal;
+    font-weight: 400 900;
+    font-stretch: 75% 125%;
+    font-display: swap;
+    src: url('assets/fonts/archivo-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  @font-face {
+    font-family: 'Archivo';
+    font-style: normal;
+    font-weight: 400 900;
+    font-stretch: 75% 125%;
+    font-display: swap;
+    src: url('assets/fonts/archivo-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: 'Geist';
+    font-style: normal;
+    font-weight: 400 600;
+    font-display: swap;
+    src: url('assets/fonts/geist-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  @font-face {
+    font-family: 'Geist';
+    font-style: normal;
+    font-weight: 400 600;
+    font-display: swap;
+    src: url('assets/fonts/geist-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  /* ------------------------------------------------------------- tokens --
+     Six couleurs, deux familles. L'encre bleu-nuit et l'or viennent du logo
+     fourni par le client (lettres marine, éclair doré) : la page n'invente
+     pas de palette, elle prend celle de la marque. */
+  :root {
+    --sc-canvas:     #0A0D14;
+    --sc-surface:    #141A26;
+    --sc-ink:        #F3F5F9;
+    --sc-ink-soft:   #97A0B2;
+    --sc-accent:     #FFD21A;
+    --sc-accent-ink: #0A0D14;
+    --sc-font-display: "Archivo", system-ui, sans-serif;
+    --sc-font-text:    "Geist", system-ui, sans-serif;
+  }
+  .sc-display { font-weight: 900; }
+  .sc-label { font-family: var(--sc-font-text); font-weight: 600; }
+  /* Encre claire sur fond sombre : un cran de graisse et un souffle de
+     tracking, sinon la prose lit fine et floue. */
+  .sc-body { font-weight: 400; letter-spacing: 0.004em; }
+
+  /* Lu par les lecteurs d'ecran, jamais dessine. Pas display:none, qui le
+     retirerait aussi de l'arbre d'accessibilite. */
+  .sc-sr {
+    position: absolute; width: 1px; height: 1px;
+    margin: -1px; padding: 0; border: 0;
+    clip-path: inset(50%); overflow: hidden; white-space: nowrap;
+  }
+  .lx-skip {
+    position: fixed; top: var(--sc-4); left: var(--sc-4); z-index: 999;
+    translate: 0 -160%;
+    background: var(--sc-accent); color: var(--sc-accent-ink);
+    font-weight: 700; font-size: var(--sc-t-sm);
+    padding: var(--sc-3) var(--sc-5); border-radius: var(--sc-r-sm);
+    text-decoration: none; box-shadow: var(--sc-e2);
+    transition: translate var(--sc-d-base) var(--sc-ease-out);
+  }
+  .lx-skip:focus-visible { translate: 0 0; }
+
+  /* ================================================================ MOUVEMENT
+     Tout ce qui bouge ici est entraine par le scroll ou par le chargement, en
+     transform, translate, opacity ou clip-path. Aucune boucle infinie : rien
+     ne s'agite pendant qu'on lit. */
+
+  /* L'arrivee de la page. Le heros doit etre plein des le premier pixel selon
+     le plancher, donc ce n'est pas un fondu au scroll : c'est une montee unique
+     au chargement, finie avant qu'on ait le temps de defiler. Elle ecrit
+     `translate`, pas `transform`, pour ne pas entrer en conflit avec la derive
+     de parallaxe qui vit sur les memes elements. */
+  @keyframes lx-arrive {
+    from { opacity: 0; translate: 0 26px; }
+    to   { opacity: 1; translate: 0 0; }
+  }
+  .lx-mark, .lx-hero__lede, .lx-tel {
+    animation: lx-arrive 740ms var(--sc-ease-out) backwards;
+  }
+  .lx-mark       { animation-delay: 60ms; }
+  .lx-hero__lede { animation-delay: 210ms; }
+  .lx-tel        { animation-delay: 300ms; }
+
+  /* ================================================================ PLANS ==
+     Un plan est une photographie plein cadre, épinglée. Le cadre garde un sol
+     sombre à lui, donc une image absente laisse une plaque propre au lieu
+     d'un trou blanc. Le mouvement de caméra est un seul transform entraîné
+     par --sc-p : pas de boucle CSS, rien ne bouge sans la main du lecteur. */
+  .lx-plan { background: var(--sc-surface); }
+  .lx-plan__img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: scale(calc(1.07 + var(--sc-p, 0) * 0.09))
+               translate3d(0, calc(var(--sc-p, 0) * -2.4vh), 0);
+    transform-origin: 50% 50%;
+    will-change: transform;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    /* La photo reste, la caméra part. La composition ne dépend pas du
+       mouvement : elle est déjà juste à l'arrêt. Le mur garde sa bascule
+       d'opacite, qui est le sommet de la page, et perd son deplacement. */
+    .lx-plan__img { transform: scale(1.02) !important; }
+    .lx-figure__frame img { transform: none !important; }
+    .lx-mark, .lx-hero__foot,
+    .lx-wall__face, .lx-wall__true { transform: none !important; }
+    .lx-mark, .lx-hero__lede, .lx-tel { animation: none; }
+    .lx-service::before,
+    .lx-services > .lx-service:last-child::after { transition-duration: 1ms; }
+  }
+
+  /* Les dégradés sont pointés sur le texte, jamais sur tout le cadre. Un
+     voile plein écran aplatit la photo partout pour corriger un coin.
+     - lx-scrim (bande) : le bloc de copie tient toute la largeur du cadre,
+       donc la densité est une bande basse, transparente au-dessus de 62 %.
+     - lx-scrim--col : la copie tient une colonne, donc la densité est une
+       colonne et la moitié droite de la photo garde tout son contraste.
+       Sous 860px la colonne devient pleine largeur : elle repasse en bande,
+       sinon la densité serait du mauvais côté de l'écran. */
+  .lx-scrim { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+  .lx-scrim {
+    background: linear-gradient(to top,
+      color-mix(in oklab, var(--sc-canvas) 96%, transparent) 0%,
+      color-mix(in oklab, var(--sc-canvas) 91%, transparent) 30%,
+      color-mix(in oklab, var(--sc-canvas) 58%, transparent) 46%,
+      transparent 64%);
+  }
+  .lx-scrim--col {
+    background: linear-gradient(to right,
+      color-mix(in oklab, var(--sc-canvas) 96%, transparent) 0%,
+      color-mix(in oklab, var(--sc-canvas) 91%, transparent) 40%,
+      color-mix(in oklab, var(--sc-canvas) 52%, transparent) 58%,
+      transparent 74%);
+  }
+  @media (max-width: 860px) {
+    .lx-scrim--col {
+      background: linear-gradient(to top,
+        color-mix(in oklab, var(--sc-canvas) 96%, transparent) 0%,
+        color-mix(in oklab, var(--sc-canvas) 90%, transparent) 34%,
+        color-mix(in oklab, var(--sc-canvas) 54%, transparent) 56%,
+        transparent 74%);
+    }
+  }
+
+  /* ---------------------------------------------------------- plan : héros -- */
+  .lx-hero__copy {
+    position: absolute; z-index: var(--sc-z-copy);
+    left: var(--sc-gutter); right: var(--sc-gutter);
+    bottom: clamp(2.5rem, 9vh, 6rem);
+  }
+  /* Le bloc de copie tient dans le tiers bas du cadre, là où la bande est
+     dense. Un mot-symbole plus grand remonterait dans la partie transparente
+     du dégradé, et sur la vraie photo cette zone est le flanc blanc du
+     camion : du blanc sur du blanc. L'échelle d'affiche existe toujours sur
+     cette page, mais elle est au sommet (le mur), là où elle est gagnée. */
+  /* Profondeur : la photo recule a -2,4vh, le mot-symbole suit a -2,2vh, le
+     pied a -0,9vh. Trois plans qui ne se deplacent pas a la meme vitesse, ce
+     qui est ce qui separe une image de fond d'une scene. Le cue ecrit deja un
+     transform sur .lx-hero__copy, donc la derive vit sur ses enfants. */
+  .lx-mark, .lx-hero__foot { will-change: transform; }
+  .lx-mark       { transform: translate3d(0, calc(var(--sc-p, 0) * -2.2vh), 0); }
+  .lx-hero__foot { transform: translate3d(0, calc(var(--sc-p, 0) * -0.9vh), 0); }
+  .lx-mark { display: block; margin: 0 0 var(--sc-5); }
+  .lx-mark-1, .lx-mark-2 {
+    display: block;
+    font-family: var(--sc-font-display); font-weight: 900;
+    line-height: 0.84; white-space: nowrap;
+  }
+  .lx-mark-1 { font-size: clamp(2.7rem, 10vw, 8.5rem); letter-spacing: -0.045em; }
+  .lx-mark-2 {
+    font-size: clamp(0.8rem, 2.5vw, 2.12rem);
+    letter-spacing: 0.34em; text-indent: 0.34em;
+    color: var(--sc-accent); margin-top: 0.34em;
+  }
+  .lx-hero__foot {
+    display: flex; flex-wrap: wrap; align-items: flex-end;
+    justify-content: space-between; gap: var(--sc-5) var(--sc-7);
+  }
+  .lx-hero__lede { max-width: 34ch; }
+  .lx-nowrap { white-space: nowrap; }
+  .lx-tel {
+    flex: none;
+    font-family: var(--sc-font-display); font-weight: 800;
+    font-size: var(--sc-t-xl); letter-spacing: -0.015em;
+    color: var(--sc-accent-ink); background: var(--sc-accent);
+    padding: var(--sc-3) var(--sc-6);
+    border-radius: var(--sc-r-sm);
+    text-decoration: none; white-space: nowrap;
+    box-shadow: var(--sc-e2);
+    transition: transform var(--sc-d-fast) var(--sc-ease-out),
+                box-shadow var(--sc-d-fast) var(--sc-ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .lx-tel:hover { transform: translateY(-2px); box-shadow: var(--sc-e3); }
+  }
+  .lx-tel:active { transform: translateY(1px) scale(0.985); }
+
+  /* ------------------------------------------------- plan : preuve (CMEQ) -- */
+  .lx-proof__copy {
+    position: absolute; z-index: var(--sc-z-copy);
+    left: var(--sc-gutter); right: var(--sc-gutter);
+    top: 50%; translate: 0 -50%;
+    max-width: min(27rem, 78vw);
+  }
+  .lx-proof__copy h2 {
+    margin: 0 0 var(--sc-5); color: var(--sc-accent);
+    font-family: var(--sc-font-display); font-weight: 900;
+    font-size: clamp(2rem, 6.4vw, 5rem);
+    line-height: 0.94; letter-spacing: -0.04em; text-wrap: balance;
+  }
+  .lx-proof__copy p { margin: 0; }
+  .lx-proof__copy p + p { margin-top: var(--sc-4); }
+  /* De la prose sur une photographie prend l'encre pleine. Le gris secondaire
+     est calibre pour un sol plat ; pose sur une image il perd le peu de marge
+     qui lui reste des qu'une zone claire passe dessous. */
+  .lx-proof__copy .sc-body { color: var(--sc-ink); }
+  /* Le numero de licence est le fait le plus verifiable de la page : on peut
+     le valider au registre de la RBQ. Il est donc compose comme une plaque
+     signaletique, pas comme une note de bas de page. */
+  .lx-rbq {
+    display: inline-block;
+    margin-top: var(--sc-5) !important;
+    padding: var(--sc-2) var(--sc-4);
+    border: 1px solid var(--sc-accent);
+    border-radius: var(--sc-r-sm);
+    font-size: var(--sc-t-sm); letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--sc-accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .lx-rbq b { font-weight: 700; letter-spacing: 0.06em; }
+  @media (max-width: 860px) {
+    /* En portrait la densite du degrade est en bas : la copie descend l'y
+       rejoindre au lieu de rester centree dans la partie claire du cadre. */
+    .lx-proof__copy {
+      top: auto; translate: none;
+      bottom: clamp(2.5rem, 9vh, 6rem);
+      max-width: none;
+    }
+  }
+
+  /* ================================================== PLAQUES (type seul) ==
+     Une plaque est du texte sur un sol plat. Le rythme vient de l'écart
+     d'échelle, jamais du mouvement. */
+  .lx-shout {
+    font-family: var(--sc-font-display); font-weight: 900;
+    font-size: clamp(2.6rem, 13vw, 12rem);
+    line-height: 0.86; letter-spacing: -0.04em;
+    margin: 0; text-wrap: balance;
+  }
+  .lx-quotes { margin-top: var(--sc-8); max-width: 34rem; }
+  .lx-quotes p {
+    margin: 0; padding-block: var(--sc-4);
+    border-top: 1px solid var(--sc-hairline);
+    font-size: var(--sc-t-lg); line-height: 1.34;
+    letter-spacing: var(--sc-track-snug); color: var(--sc-ink);
+  }
+  .lx-quotes p:last-child { border-bottom: 1px solid var(--sc-hairline); }
+  .lx-after { margin-top: var(--sc-7); max-width: 40rem; }
+
+  /* ------------------------------------------------------ plaque : silence -- */
+  .lx-silence {
+    min-height: 100svh;
+    display: grid; align-items: center; justify-items: end;
+  }
+  /* La mesure vit sur le texte, pas sur l'emballage : un ch sur le conteneur
+     se résout contre la taille du CONTENEUR (celle du corps), ce qui donne
+     une colonne de 190px sous un titre de 5rem. */
+  .lx-silence p {
+    margin: 0; margin-left: auto; max-width: 15ch; text-align: right;
+    font-family: var(--sc-font-display); font-weight: 900;
+    font-size: clamp(1.9rem, 6.2vw, 5.4rem);
+    line-height: 1.02; letter-spacing: -0.035em;
+  }
+
+  /* --------------------------------------------- plaque : le mur (sommet) --
+     Deux textes par ligne dans la même case de grille, seuils dispersés. */
+  .lx-wall {
+    display: grid; grid-template-rows: auto 1fr auto;
+    padding: var(--sc-6) var(--sc-gutter);
+    padding-top: max(var(--sc-6), 9svh);
+    padding-bottom: max(var(--sc-6), 7svh);
+  }
+  .lx-wall__rows { align-self: center; width: 100%; }
+  .lx-wall__row {
+    display: grid; margin: 0;
+    font-family: var(--sc-font-display); font-weight: 900;
+    font-size: clamp(1.45rem, 6.6vw, 6.2rem);
+    line-height: 1.02; letter-spacing: -0.04em;
+    text-transform: uppercase; white-space: nowrap;
+  }
+  .lx-wall__row > span { grid-area: 1 / 1; }
+  /* Le claquement. Le facteur 36 rend la bascule quasi instantanée autour du
+     seuil de la ligne : ce n'est pas un fondu, c'est un disjoncteur. Le repli
+     0 sur --sc-p garantit que la façade est là avant la première frame, donc
+     l'acte n'a jamais de sol vide. Aucun transform, aucune transition : le
+     mouvement réduit ne lui enlève rien. */
+  /* L'opacite claque, et un deplacement de 10px claque avec elle : la verite
+     entre par la droite, la facade sort par la gauche. Les deux sont bornes
+     par clamp, donc hors du seuil ils valent exactement 0 et rien ne flotte.
+     C'est le declic d'un disjoncteur, pas un fondu. */
+  .lx-wall__face {
+    opacity: clamp(0, calc((var(--at) - var(--sc-p, 0)) * 36), 1);
+    transform: translate3d(clamp(-10px, calc((var(--at) - var(--sc-p, 0)) * 300px), 0px), 0, 0);
+  }
+  .lx-wall__true {
+    opacity: clamp(0, calc((var(--sc-p, 0) - var(--at)) * 36), 1);
+    transform: translate3d(clamp(0px, calc((var(--at) - var(--sc-p, 0)) * 300px), 10px), 0, 0);
+    color: var(--sc-accent);
+  }
+  .lx-wall__legend {
+    margin: 0; color: var(--sc-ink-soft);
+    font-size: var(--sc-t-sm); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .lx-wall__legend--after { color: var(--sc-accent); text-align: right; }
+
+  /* ---------------------------------------------------- plaque : services --
+     Du texte nu sur de l'espace, séparé par des filets, avec une seule
+     photographie tenue dans sa propre colonne. Aucune carte, aucune icône,
+     aucune grille de trois colonnes égales. */
+  .lx-work { display: grid; gap: var(--sc-8); margin-top: var(--sc-8); }
+  @media (min-width: 1000px) {
+    .lx-work { grid-template-columns: 1fr 22rem; align-items: start; gap: var(--sc-9); }
+    .lx-figure { position: sticky; top: clamp(2rem, 12vh, 8rem); }
+  }
+  .lx-figure { margin: 0; }
+  .lx-figure__frame {
+    background: var(--sc-surface);
+    border-radius: var(--sc-r-md);
+    overflow: clip;
+    aspect-ratio: 3 / 4;
+  }
+  .lx-figure__frame img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: 50% 50%;
+    /* Meme caméra que les plans, en plus discret : la photo avance pendant
+       qu'on lit la liste a cote. */
+    transform: scale(calc(1.02 + var(--sc-p, 0) * 0.08));
+    will-change: transform;
+  }
+  .lx-figure figcaption {
+    margin-top: var(--sc-4);
+    color: var(--sc-ink-soft); font-size: var(--sc-t-sm);
+    max-width: 34ch;
+  }
+  /* Le filet de chaque ligne se trace au lieu d'apparaitre. transition-delay
+     est declare `inherit` : le moteur pose le retard echelonne sur l'article,
+     et le pseudo-element va le chercher, donc le trace suit exactement la
+     cascade du texte. */
+  .lx-service {
+    position: relative;
+    display: grid; gap: var(--sc-2) var(--sc-7);
+    padding-block: var(--sc-6);
+  }
+  .lx-service::before, .lx-services > .lx-service:last-child::after {
+    content: ""; position: absolute; inset-inline: 0; height: 1px;
+    background: var(--sc-hairline);
+    transform: scaleX(0); transform-origin: 0 50%;
+    transition: transform 700ms var(--sc-ease-out);
+    transition-delay: inherit;
+  }
+  .lx-service::before { top: 0; }
+  .lx-services > .lx-service:last-child::after { bottom: 0; }
+  .lx-service.sc-in::before,
+  .lx-services > .lx-service.sc-in:last-child::after { transform: scaleX(1); }
+  .lx-service h4 {
+    margin: 0;
+    font-family: var(--sc-font-display); font-weight: 800;
+    font-size: var(--sc-t-xl); line-height: 1.06;
+    letter-spacing: var(--sc-track-snug);
+  }
+  /* Le nom du groupe est une etiquette, pas un deuxieme titre d'affiche : il
+     separe sans entrer en concurrence avec les lignes de service. Plus d'air
+     au-dessus qu'en dessous, parce que l'espace appartient a la frontiere. */
+  .lx-groupe {
+    margin: var(--sc-9) 0 var(--sc-3);
+    font-family: var(--sc-font-text); font-weight: 600;
+    font-size: var(--sc-t-xs); letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--sc-accent);
+  }
+  .lx-groupe:first-child { margin-top: 0; }
+  .lx-service p { margin: 0; color: var(--sc-ink-soft); max-width: 46ch; }
+  /* Le titre et la description se mettent cote a cote seulement quand la
+     colonne de liste est assez large pour les deux. Entre 1000 et 1240px la
+     photo prend deja 22rem a cote, donc la liste repasse en une colonne :
+     autrement les descriptions deviennent des rubans de trente caracteres. */
+  @media (min-width: 640px) and (max-width: 999px) {
+    .lx-service { grid-template-columns: 14rem 1fr; align-items: start; }
+  }
+  @media (min-width: 1240px) {
+    .lx-service { grid-template-columns: 16rem 1fr; align-items: start; }
+  }
+
+  /* ----------------------------------------------- barre d'action mobile --
+     La seule chrome persistante de la page, et elle n'existe qu'en portrait.
+     Elle contredit la regle « aucune chrome » que la grammaire s'etait donnee :
+     c'est un choix du client, pris en connaissance de cause, parce qu'un
+     electricien residentiel se fait joindre depuis un telephone et qu'obliger
+     a remonter onze ecrans pour trouver le numero coute des appels.
+     Elle entre en animation de defilement NATIVE, sous @supports : un
+     navigateur qui ne connait pas la regle l'affiche simplement tout le temps.
+     Le risque est pris dans le bon sens. */
+  @keyframes lx-barre { from { translate: 0 130%; } to { translate: 0 0; } }
+  .lx-barre { display: none; }
+  @media (max-width: 700px) {
+    .lx-barre {
+      --lx-barre-h: 4.4rem;
+      display: grid; grid-template-columns: 1fr 1fr;
+      position: fixed; inset: auto 0 0 0; z-index: var(--sc-z-chrome);
+      gap: 1px;
+      background: var(--sc-hairline-strong);
+      border-top: 1px solid var(--sc-hairline-strong);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    @supports (animation-timeline: scroll()) {
+      @media (prefers-reduced-motion: no-preference) {
+        .lx-barre {
+          animation: lx-barre linear both;
+          animation-timeline: scroll(root block);
+          animation-range: 55vh 92vh;
+        }
+      }
+    }
+    .lx-barre a {
+      display: flex; align-items: center; justify-content: center; gap: var(--sc-2);
+      min-height: var(--lx-barre-h);
+      font-family: var(--sc-font-display); font-weight: 800;
+      font-size: var(--sc-t-base); letter-spacing: -0.01em;
+      text-decoration: none;
+      transition: filter var(--sc-d-fast) var(--sc-ease-out);
+    }
+    .lx-barre a:active { filter: brightness(0.92); }
+    .lx-barre__tel { background: var(--sc-accent); color: var(--sc-accent-ink); }
+    .lx-barre__mail { background: var(--sc-surface); color: var(--sc-ink); }
+    .lx-barre svg { width: 1.15em; height: 1.15em; flex: none; }
+    /* La barre couvre le bas de l'ecran : la fermeture recule d'autant, sinon
+       elle mange la derniere ligne du pied de page. */
+    .lx-close { padding-bottom: calc(var(--sc-9) + 4.4rem + env(safe-area-inset-bottom, 0px)); }
+  }
+
+  /* ------------------------------------------- plaque : la soumission --
+     Un formulaire est une plaque dont le contenu se remplit. Meme langage que
+     le reste : du texte sur de l'espace, des filets, aucune carte, aucune
+     boite. Les champs sont soulignes plutot qu'encadres, comme les lignes de
+     la liste des services. */
+  .lx-devis { background: var(--sc-surface); }
+  /* Le titre de cette plaque descend d'un cran sous l'echelle d'affiche des
+     autres. Deux raisons : le sommet de la page doit rester le plus gros
+     evenement visuel, et un formulaire qu'on pousse sous la ligne de flottaison
+     par un titre de 166px est un formulaire qu'on ne remplit pas. */
+  .lx-devis .lx-shout { font-size: clamp(2.1rem, 6.6vw, 5.2rem); }
+  .lx-devis__lede { margin: var(--sc-5) 0 0; }
+  .lx-form {
+    display: grid; gap: var(--sc-6) var(--sc-7);
+    margin-top: var(--sc-8);
+  }
+  @media (min-width: 760px) {
+    .lx-form { grid-template-columns: 1fr 1fr; }
+    .lx-field--large, .lx-form__pied, .lx-form__erreur { grid-column: 1 / -1; }
+  }
+  .lx-field { display: grid; gap: var(--sc-2); }
+  .lx-field label {
+    font-size: var(--sc-t-xs); letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--sc-ink-soft);
+  }
+  .lx-opt { text-transform: none; letter-spacing: 0; opacity: 0.75; }
+  .lx-field :is(input, select, textarea) {
+    width: 100%;
+    background: transparent;
+    color: var(--sc-ink);
+    font-family: var(--sc-font-text); font-size: var(--sc-t-base);
+    border: 0; border-bottom: 1px solid var(--sc-hairline-strong);
+    border-radius: 0;
+    padding: var(--sc-3) 0;
+    transition: border-color var(--sc-d-fast) var(--sc-ease-out);
+  }
+  .lx-field textarea { resize: vertical; line-height: 1.5; }
+  .lx-field :is(input, select, textarea):hover { border-bottom-color: var(--sc-ink-soft); }
+  .lx-field :is(input, select, textarea):focus-visible {
+    outline: none;
+    border-bottom-color: var(--sc-accent);
+    box-shadow: 0 1px 0 0 var(--sc-accent);
+  }
+  .lx-field ::placeholder { color: color-mix(in oklab, var(--sc-ink-soft) 70%, transparent); }
+  /* :user-invalid et non :invalid : un champ vide qu'on n'a pas encore touche
+     n'est pas une erreur, et le peindre en rouge des le chargement est la
+     facon la plus sure de faire fuir quelqu'un. */
+  .lx-field :is(input, textarea):user-invalid { border-bottom-color: #FF6B5A; }
+  .lx-form__pied {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: var(--sc-4) var(--sc-6); margin-top: var(--sc-3);
+  }
+  .lx-submit { border: 0; cursor: pointer; font-size: var(--sc-t-lg); }
+  .lx-form__note { margin: 0; max-width: 34ch; color: var(--sc-ink-soft); font-size: var(--sc-t-sm); }
+  .lx-form__erreur { margin: 0; color: #FF6B5A; font-size: var(--sc-t-sm); }
+  .lx-devis__sinon {
+    margin: var(--sc-8) 0 0; padding-top: var(--sc-5);
+    border-top: 1px solid var(--sc-hairline);
+    color: var(--sc-ink-soft); max-width: 54ch;
+  }
+  .lx-devis__sinon a { color: var(--sc-ink); text-decoration-color: var(--sc-accent); text-decoration-thickness: 2px; }
+
+  /* ------------------------------------------------- plaque : fermeture --
+     L'inversion. Coupe franche vers le clair, la plus petite typo du site,
+     et le vrai logo, qui vit nativement sur un sol pâle. Redéclarer color en
+     même temps que le jeton : color s'hérite en valeur calculée, donc
+     redéfinir --sc-ink seul ne réencre rien. */
+  .lx-close {
+    --sc-ink:      #10141F;
+    --sc-ink-soft: #4C5468;
+    --sc-accent:   #6E5A00;
+    --sc-hairline: color-mix(in oklab, #10141F 18%, transparent);
+    color: var(--sc-ink);
+    background: #F3F4F7;
+    padding-block: var(--sc-9);
+    min-height: 100svh;
+    display: grid; align-content: center;
+  }
+  .lx-close__logo { display: block; width: clamp(10rem, 30vw, 17rem); height: auto; margin: 0 0 var(--sc-6); }
+  .lx-close__mark {
+    margin: 0 0 var(--sc-7);
+    font-family: var(--sc-font-display); font-weight: 900;
+    font-size: var(--sc-t-lg); letter-spacing: 0.02em; text-transform: uppercase;
+  }
+  .lx-close__grid { display: grid; gap: var(--sc-6) var(--sc-7); }
+  @media (min-width: 720px) {
+    .lx-close__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  .lx-close dt {
+    font-size: var(--sc-t-xs); letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--sc-ink-soft); margin-bottom: var(--sc-2);
+  }
+  .lx-close dd { margin: 0; font-size: var(--sc-t-base); line-height: 1.5; }
+  .lx-close dd + dd { margin-top: var(--sc-1); }
+  .lx-close a {
+    color: var(--sc-ink);
+    text-decoration-line: underline;
+    text-decoration-color: var(--sc-accent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.22em;
+    transition: text-decoration-color var(--sc-d-fast) var(--sc-ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .lx-close a:hover { text-decoration-color: var(--sc-ink); }
+  }
+  /* La fermeture porte le numero de telephone : c'est le contenu le plus
+     important de la page, et il ne doit dependre d'aucun script pour etre
+     lisible. Son entree est donc une animation de defilement NATIVE, sous
+     @supports : un navigateur qui ne la connait pas affiche simplement le bloc,
+     complet et immobile. C'est l'inverse du reflexe habituel, ou le contenu
+     part a opacite 0 en attendant que le JavaScript le revele. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .lx-close__logo, .lx-close__mark,
+      .lx-close__grid > *, .lx-close__fine {
+        animation: lx-arrive linear both;
+        animation-timeline: view();
+        animation-range: entry 12% cover 26%;
+      }
+      .lx-close__mark        { animation-range: entry 16% cover 30%; }
+      .lx-close__grid > *    { animation-range: entry 20% cover 34%; }
+      .lx-close__grid > :nth-child(2) { animation-range: entry 24% cover 38%; }
+      .lx-close__grid > :nth-child(3) { animation-range: entry 28% cover 42%; }
+      .lx-close__fine        { animation-range: entry 32% cover 46%; }
+    }
+  }
+
+  .lx-close__legal { margin: var(--sc-4) 0 0; font-size: var(--sc-t-sm); }
+  .lx-devis__legal { display: inline-block; margin-top: var(--sc-3); font-size: var(--sc-t-sm); }
+  .lx-close__fine {
+    margin: var(--sc-8) 0 0; padding-top: var(--sc-5);
+    border-top: 1px solid var(--sc-hairline);
+    color: var(--sc-ink-soft); font-size: var(--sc-t-sm); max-width: 52ch;
+  }
+
+  /* --------------------------------------------------------------- mobile --
+     Une plaque qui suit un plan épinglé prend moins d'air : la scène a déjà
+     besoin d'une fenêtre entière pour sortir. */
+  .lx-after-pin { padding-top: var(--sc-7); }
+  @media (max-width: 700px) {
+    /* Le portrait a moins de largeur : le mot-symbole monte d'un cran pour
+       garder son poids, et la bande densifie plus haut pour le suivre. */
+    .lx-mark-1 { font-size: 14vw; }
+    .lx-mark-2 { font-size: 3.4vw; }
+    .lx-scrim {
+      background: linear-gradient(to top,
+        color-mix(in oklab, var(--sc-canvas) 96%, transparent) 0%,
+        color-mix(in oklab, var(--sc-canvas) 92%, transparent) 36%,
+        color-mix(in oklab, var(--sc-canvas) 60%, transparent) 54%,
+        transparent 72%);
+    }
+    /* Recadrage propre au portrait. Une photo paysage dans un cadre 375x812
+       ne montre que 31 % de sa largeur : au centre, le camion perd l'homme et
+       la maison, c'est-a-dire toute l'histoire. Chaque plan choisit donc son
+       point d'ancrage, remonte pour que le sujet ne passe pas sous la bande
+       de copie. object-position n'est pas un transform, donc ca ne touche pas
+       le mouvement de camera. */
+    .lx-plan__img--camion  { object-position: 63% 44%; }
+    .lx-plan__img--panneau { object-position: 57% 34%; }
+    .lx-hero__foot { gap: var(--sc-4); }
+    .lx-tel { font-size: var(--sc-t-lg); width: 100%; text-align: center; }
+    .lx-silence { justify-items: stretch; }
+    .lx-silence p { max-width: none; }
+    /* Direction artistique propre au téléphone : en nowrap, la plus longue
+       ligne plafonne le mur à 25px sur un écran de 375, ce qui n'est plus un
+       mur mais une légende. */
+    .lx-wall { padding-top: max(var(--sc-5), 6svh); padding-bottom: max(var(--sc-5), 5svh); }
+    .lx-wall__row {
+      white-space: normal; text-wrap: balance;
+      font-size: 9.6vw; line-height: 1.04; letter-spacing: -0.035em;
+    }
+    .lx-wall__row + .lx-wall__row { margin-top: 0.1em; }
+    /* Cible tactile : un numéro qu'on rate est un appel perdu. */
+    .lx-close dd a { display: inline-block; padding-block: 0.4rem; }
+    /* La barre d'action flotte au-dessus du bas de l'ecran. Quand le clavier
+       amene un champ en vue, le navigateur le colle au bas du viewport, donc
+       sous la barre. scroll-margin-bottom lui reserve la hauteur qu'il faut,
+       et la section gagne la meme marge pour que le bouton d'envoi ne finisse
+       jamais derriere la barre. */
+    .lx-field :is(input, select, textarea) {
+      scroll-margin-bottom: calc(4.4rem + env(safe-area-inset-bottom, 0px) + var(--sc-5));
+    }
+    .lx-devis { padding-bottom: calc(var(--sc-section) + 4.4rem); }
+  }
+</style>
+</head>
+<body>
+
+<a class="lx-skip" href="#contact">Aller aux coordonnées</a>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<nav class="lx-barre" aria-label="Joindre Lexma Électrique">
+  <a class="lx-barre__tel" href="tel:+14507567111">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+    Appeler
+  </a>
+  <a class="lx-barre__mail" href="mailto:gestion@lexma-electrique.com?subject=Demande%20de%20soumission">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2.5 6.5 9.5 7 9.5-7"/></svg>
+    Courriel
+  </a>
+</nav>
+
+<main>
+
+  <!-- 1 · PLAN D'OUVERTURE : le camion dans l'entrée. Acte épinglé, un seul
+       mouvement de caméra entraîné par --sc-p. Le mot-symbole est posé dans
+       le coin le plus sombre du cadre, protégé par un dégradé de coin et non
+       par un voile plein écran. Cue en « greet and hold » : plein au premier
+       pixel et tenu jusqu'au bout de l'épingle. -->
+  <section data-sc-act="pin" data-sc-span="1.45">
+    <div data-sc-stage class="lx-plan">
+      <img class="lx-plan__img lx-plan__img--camion" src="assets/plan-camion.jpg"
+           srcset="assets/plan-camion-800.jpg 800w, assets/plan-camion.jpg 2000w" sizes="100vw"
+           alt="Le camion de service de Lexma Électrique, portes arrière ouvertes sur les bobines de fil et les coffres, stationné dans l'entrée d'une maison."
+           width="2000" height="1116" fetchpriority="high" decoding="async">
+      <div class="lx-scrim" aria-hidden="true"></div>
+      <div class="lx-hero__copy" data-sc-cue="0 1 0 0">
+        <h1 class="lx-mark">
+          <span class="lx-mark-1">Lexma</span>
+          <span class="lx-mark-2">Électrique</span>
+        </h1>
+        <div class="lx-hero__foot">
+          <p class="sc-lede lx-hero__lede">Électricien résidentiel et commercial à <span class="lx-nowrap">Saint-Ambroise-de-Kildare</span>. Panneaux, filage, éclairage et mise aux normes. Membre de la CMEQ.</p>
+          <a class="lx-tel" href="tel:+14507567111">450 756-7111</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · PLAQUE : la tension. Coupe franche du plan vers le texte nu. -->
+  <section class="sc-section lx-after-pin" data-sc-act="flow">
+    <div class="sc-wrap">
+      <h2 class="lx-shout" data-sc-cue="0.06 1" data-sc-kinetic="words">Ça saute encore.</h2>
+      <div class="lx-quotes" data-sc-in data-sc-stagger="70">
+        <p>« On refait la cuisine, il faut tout repasser. »</p>
+        <p>« Le vendeur a parlé d'un panneau à changer. »</p>
+        <p>« La prise derrière le divan est chaude. »</p>
+        <p>« Il reste un plafonnier à poser depuis deux ans. »</p>
+      </div>
+      <p class="sc-body lx-after" data-sc-in>Aucune de ces quatre-là n'est un cas spécial. C'est la semaine normale d'un électricien. Lexma prend ces appels-là, et ceux des commerces aussi.</p>
+    </div>
+  </section>
+
+  <!-- 3 · PLAQUE : le silence. Une phrase, ancrée à droite, essuyée à
+       l'entrée. L'acte le plus calme, juste devant le plus fort. -->
+  <section data-sc-act="flow">
+    <h2 class="sc-sr">Ce que le propriétaire ne voit pas</h2>
+    <div class="sc-wrap lx-silence">
+      <div data-sc-reveal="left" data-sc-reveal-at="0.18 0.44">
+        <p>Ce qu'il y a dans vos murs, vous ne le voyez pas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · PLAQUE, LE SOMMET : le mur qui se retourne. Plus grande travée de
+       la page. Chaque ligne porte sa façade et sa vérité dans la même case de
+       grille et bascule à son propre seuil. Les seuils ne suivent pas l'ordre
+       vertical (4, 1, 6, 2, 5, 3) : le mur se retourne par endroits au lieu
+       de s'essuyer du haut vers le bas. -->
+  <section data-sc-act="pin" data-sc-span="2.8">
+    <h2 class="sc-sr">Ce qu'on trouve derrière les murs d'une maison</h2>
+    <div data-sc-stage class="lx-wall">
+      <p class="lx-wall__legend" data-sc-cue="0 0.26 0">Ce que vous voyez</p>
+      <div class="lx-wall__rows">
+        <p class="lx-wall__row" style="--at:0.30"><span class="lx-wall__face">Cuisine neuve</span><span class="lx-wall__true">Sans DDFT</span></p>
+        <p class="lx-wall__row" style="--at:0.16"><span class="lx-wall__face">Sous-sol fini</span><span class="lx-wall__true">Boîte murée</span></p>
+        <p class="lx-wall__row" style="--at:0.72"><span class="lx-wall__face">Tout marche</span><span class="lx-wall__true">Panneau plein</span></p>
+        <p class="lx-wall__row" style="--at:0.44"><span class="lx-wall__face">Maison de 1970</span><span class="lx-wall__true">Fils sans terre</span></p>
+        <p class="lx-wall__row" style="--at:0.86"><span class="lx-wall__face">Une rallonge</span><span class="lx-wall__true">Circuit de trop</span></p>
+        <p class="lx-wall__row" style="--at:0.58"><span class="lx-wall__face">Aucune odeur</span><span class="lx-wall__true">Fil desserré</span></p>
+      </div>
+      <p class="lx-wall__legend lx-wall__legend--after" data-sc-cue="0.66 1">Ce qu'on trouve derrière</p>
+    </div>
+  </section>
+
+  <!-- 5 · PLAQUE : ce qu'on fait. Une photographie tenue dans sa propre
+       colonne, avec une légende de fait, et la liste en texte nu à côté. -->
+  <section class="sc-section lx-after-pin" id="services" data-sc-act="flow">
+    <div class="sc-wrap">
+      <h2 class="lx-shout" data-sc-in>Ce qu'on fait.</h2>
+      <div class="lx-work">
+        <div class="lx-services" data-sc-in data-sc-stagger="60">
+          <h3 class="lx-groupe">Résidentiel</h3>
+          <article class="lx-service">
+            <h4>Panneau électrique</h4>
+            <p>Remplacement, mise à niveau à 100 A ou 200 A, ajout de circuits, entrée électrique et mât.</p>
+          </article>
+          <article class="lx-service">
+            <h4>Filage et rénovation</h4>
+            <p>Cuisine, salle de bain, sous-sol, agrandissement. Refaire le filage d'une pièce ou d'une maison complète.</p>
+          </article>
+          <article class="lx-service">
+            <h4>Éclairage</h4>
+            <p>Encastrés, luminaires, gradateurs, éclairage sous-armoires et éclairage extérieur.</p>
+          </article>
+          <article class="lx-service">
+            <h4>Prises et interrupteurs</h4>
+            <p>Ajout de prises, disjoncteurs de fuite à la terre (DDFT) pour la cuisine, la salle de bain et l'extérieur, prises 240 V pour sécheuse, cuisinière ou spa.</p>
+          </article>
+          <article class="lx-service">
+            <h4>Mise aux normes</h4>
+            <p>Correction de sorties sans mise à la terre, de boîtes de jonction inaccessibles et de raccords non conformes, avant une vente ou après une inspection.</p>
+          </article>
+          <article class="lx-service">
+            <h4>Avertisseurs</h4>
+            <p>Avertisseurs de fumée et de monoxyde de carbone raccordés et interconnectés.</p>
+          </article>
+
+          <h3 class="lx-groupe">Commercial</h3>
+          <article class="lx-service">
+            <h4>Locaux commerciaux</h4>
+            <p>Éclairage, prises, circuits dédiés et raccordement d'équipement, en rénovation de local comme en aménagement.</p>
+          </article>
+          <article class="lx-service">
+            <h4>Panneaux et distribution</h4>
+            <p>Remplacement, ajout de panneaux, augmentation de capacité et nouveaux circuits pour de l'équipement qui arrive.</p>
+          </article>
+          <article class="lx-service">
+            <h4>Entretien et dépannage</h4>
+            <p>Correction de problèmes, remplacement de composantes et travaux correctifs après une inspection.</p>
+          </article>
+        </div>
+        <figure class="lx-figure">
+          <div class="lx-figure__frame" data-sc-reveal="up" data-sc-reveal-at="0.16 0.46">
+            <img src="assets/plan-prise.jpg"
+                 srcset="assets/plan-prise-480.jpg 480w, assets/plan-prise.jpg 810w" sizes="(min-width: 1000px) 22rem, 100vw"
+                 alt="Des mains gantées de cuir qui raccordent une prise murale, boîte ouverte et fils apparents, au-dessus d'une toile de protection et d'outils posés au sol."
+                 width="810" height="1080" loading="lazy" decoding="async">
+          </div>
+          <figcaption>La toile au sol et les outils rangés font partie du travail. Une prise se change en une visite.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · PLAN : la preuve. Le panneau, plein cadre, épinglé. Le fait légal
+       arrive par-dessus, protégé par un dégradé de coin. Rien ici n'est un
+       chiffre inventé : la règle CMEQ est la loi, le reste est un choix. -->
+  <section data-sc-act="pin" data-sc-span="1.6">
+    <div data-sc-stage class="lx-plan">
+      <img class="lx-plan__img lx-plan__img--panneau" src="assets/plan-panneau.jpg"
+           srcset="assets/plan-panneau-800.jpg 800w, assets/plan-panneau.jpg 2000w" sizes="100vw"
+           alt="Un maître électricien en lunettes de sécurité, tournevis à la main, qui travaille dans un panneau de distribution ouvert."
+           width="2000" height="1493" loading="lazy" decoding="async">
+      <div class="lx-scrim lx-scrim--col" aria-hidden="true"></div>
+      <div class="lx-proof__copy">
+        <h2 data-sc-cue="0 1 0.1 0.22" data-sc-kinetic="lines">Membre de la CMEQ.</h2>
+        <div class="sc-body" data-sc-cue="0.05 1 0.14 0.22">
+          <p>Au Québec, les travaux d'électricité sont réservés aux entrepreneurs membres de la Corporation des maîtres électriciens du Québec. Lexma Électrique en est membre.</p>
+          <p>Résidentiel et commercial. Une maison, un logement ou un local : le Code de construction du Québec, chapitre V, Électricité, est le même, et la licence aussi.</p>
+        </div>
+        <p class="lx-rbq" data-sc-cue="0.24 1 0.2 0.24">Licence RBQ <b>5767-5993-01</b></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · PLAQUE DE FERMETURE : l'inversion. Coupe franche vers le clair, la
+       plus petite typo du site, le vrai logo sur son sol pâle, l'appel à
+       l'action en lien souligné. Dernier élément de la page. -->
+  <!-- 7 · PLAQUE DE TRAVAIL : la demande de soumission. Coupe franche vers le
+       sol intermediaire. Le formulaire n'a pas de serveur derriere lui : a
+       l'envoi, la page compose un courriel deja redige dans le logiciel de
+       messagerie du visiteur. Rien n'est promis qui ne soit tenu, et rien ne
+       se perd dans un service tiers. -->
+  <section class="sc-section lx-devis" id="soumission" data-sc-act="flow">
+    <div class="sc-wrap">
+      <div class="lx-devis__tete" data-sc-in data-sc-stagger="80">
+        <h2 class="lx-shout">Envoyez-nous votre projet.</h2>
+        <p class="sc-lede lx-devis__lede">Décrivez les travaux, joignez vos photos, et on vous revient avec une soumission.</p>
+      </div>
+
+      <form class="lx-form" data-sc-in novalidate>
+        <div class="lx-field">
+          <label for="f-nom">Nom</label>
+          <input id="f-nom" name="nom" type="text" autocomplete="name" required>
+        </div>
+        <div class="lx-field">
+          <label for="f-tel">Téléphone</label>
+          <input id="f-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" required>
+        </div>
+        <div class="lx-field">
+          <label for="f-courriel">Courriel <span class="lx-opt">facultatif</span></label>
+          <input id="f-courriel" name="courriel" type="email" autocomplete="email">
+        </div>
+        <div class="lx-field">
+          <label for="f-adresse">Adresse des travaux</label>
+          <input id="f-adresse" name="adresse" type="text" autocomplete="street-address">
+        </div>
+        <div class="lx-field lx-field--large">
+          <label for="f-type">Type de travaux</label>
+          <select id="f-type" name="type">
+            <option>Je ne sais pas encore</option>
+            <optgroup label="Résidentiel">
+              <option>Panneau électrique</option>
+              <option>Filage et rénovation</option>
+              <option>Éclairage</option>
+              <option>Prises et interrupteurs</option>
+              <option>Mise aux normes</option>
+              <option>Avertisseurs</option>
+            </optgroup>
+            <optgroup label="Commercial">
+              <option>Local commercial</option>
+              <option>Panneaux et distribution</option>
+              <option>Entretien et dépannage</option>
+            </optgroup>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="lx-field lx-field--large">
+          <label for="f-projet">Votre projet</label>
+          <textarea id="f-projet" name="projet" rows="5" maxlength="1500" required
+            placeholder="Ce que vous voulez faire, l'âge de la maison, ce qui vous inquiète, les délais."></textarea>
+        </div>
+        <div class="lx-form__pied">
+          <button class="lx-tel lx-submit" type="submit">Envoyer la demande</button>
+          <p class="lx-form__note">Votre logiciel de courriel s'ouvre avec la demande déjà écrite. Ajoutez-y vos photos avant d'envoyer.</p>
+        </div>
+        <p class="lx-form__erreur" role="alert" hidden></p>
+      </form>
+
+      <p class="lx-devis__sinon" data-sc-in>Ou écrivez directement à <a href="mailto:gestion@lexma-electrique.com">gestion@lexma-electrique.com</a>, ou appelez au <a href="tel:+14507567111">450 756-7111</a>.<br>
+        <span class="lx-devis__legal">Ce que nous faisons de vos renseignements : <a href="confidentialite.html">politique de confidentialité</a>. Ce site ne dépose aucun témoin.</span></p>
+    </div>
+  </section>
+
+
+</main>
+
+  <footer class="lx-close" id="contact">
+    <div class="sc-wrap">
+      <img class="lx-close__logo" src="assets/logo-lexma.png" alt="" width="423" height="123" loading="lazy" decoding="async">
+      <h2 class="lx-close__mark">Lexma Électrique</h2>
+      <dl class="lx-close__grid">
+        <div>
+          <dt>Nous joindre</dt>
+          <dd><a href="tel:+14507567111">450 756-7111</a></dd>
+          <dd><a href="mailto:gestion@lexma-electrique.com">gestion@lexma-electrique.com</a></dd>
+        </div>
+        <div>
+          <dt>Adresse</dt>
+          <dd>128, rue des Œillets<br>Saint-Ambroise-de-Kildare<br>(Québec) J0K 1C0</dd>
+        </div>
+        <div>
+          <dt>Licence RBQ</dt>
+          <dd class="sc-nums">5767-5993-01</dd>
+          <dd>Membre de la CMEQ</dd>
+        </div>
+      </dl>
+      <p class="lx-close__fine">Électricien résidentiel et commercial, Saint-Ambroise-de-Kildare et les environs. Membre de la Corporation des maîtres électriciens du Québec. Licence délivrée par la Régie du bâtiment du Québec.</p>
+      <p class="lx-close__legal"><a href="confidentialite.html">Politique de confidentialité et de témoins</a></p>
+    </div>
+  </footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Electrician",
+  "name": "Lexma Électrique",
+  "description": "Électricien résidentiel et commercial à Saint-Ambroise-de-Kildare. Panneaux électriques, filage, éclairage, prises et mise aux normes. Membre de la CMEQ, licence RBQ 5767-5993-01.",
+  "telephone": "+1-450-756-7111",
+  "email": "gestion@lexma-electrique.com",
+  "logo": "assets/logo-lexma.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "128, rue des Œillets",
+    "addressLocality": "Saint-Ambroise-de-Kildare",
+    "addressRegion": "QC",
+    "postalCode": "J0K 1C0",
+    "addressCountry": "CA"
+  },
+  "identifier": {
+    "@type": "PropertyValue",
+    "name": "Licence RBQ",
+    "value": "5767-5993-01"
+  },
+  "memberOf": {
+    "@type": "Organization",
+    "name": "Corporation des maîtres électriciens du Québec"
+  }
+}
+</script>
+
+<script src="scrollcraft.js"></script>
+<script>
+ScrollCraft.mount(document.body);
+
+/* --------------------------------------------------------------------------
+   La demande de soumission.
+
+   Le site est un dossier de fichiers statiques : il n'y a pas de serveur pour
+   recevoir un POST. Plutot que de promettre un envoi qui n'arriverait nulle
+   part, ou de faire transiter les coordonnees d'un client par un service
+   tiers sans qu'il le sache, la page compose le courriel et le remet au
+   logiciel de messagerie du visiteur. Il voit ce qui part, il peut y joindre
+   ses photos, et il garde une copie dans ses envois.
+
+   La validation est faite a la main parce que le formulaire porte `novalidate`
+   pour garder la main sur le message d'erreur, en francais et a un seul
+   endroit plutot qu'en bulles natives.
+   -------------------------------------------------------------------------- */
+(function () {
+  var form = document.querySelector('.lx-form');
+  if (!form) return;
+  var erreur = form.querySelector('.lx-form__erreur');
+  var DEST = 'gestion@lexma-electrique.com';
+
+  function valeur(nom) {
+    var el = form.elements[nom];
+    return el ? el.value.trim() : '';
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    /* Les noms sont ecrits ici, pas deduits des etiquettes : « Votre projet »
+       donnerait « il manque votre votre projet ». Une phrase qui se lit mal
+       est une phrase qu'on croit moins. */
+    var REQUIS = [
+      ['nom',    'votre nom'],
+      ['tel',    'votre téléphone'],
+      ['projet', 'une description du projet']
+    ];
+    var manquants = [], premierVide = null;
+    REQUIS.forEach(function (paire) {
+      var el = form.elements[paire[0]];
+      if (el && !el.value.trim()) {
+        manquants.push(paire[1]);
+        if (!premierVide) premierVide = el;
+      }
+    });
+    if (manquants.length) {
+      var liste = manquants.length === 1
+        ? manquants[0]
+        : manquants.slice(0, -1).join(', ') + ' et ' + manquants[manquants.length - 1];
+      erreur.textContent = 'Il manque ' + liste + '.';
+      erreur.hidden = false;
+      premierVide.focus();
+      return;
+    }
+    erreur.hidden = true;
+
+    var lignes = [
+      'Nom : ' + valeur('nom'),
+      'Téléphone : ' + valeur('tel'),
+      'Courriel : ' + (valeur('courriel') || 'non fourni'),
+      'Adresse des travaux : ' + (valeur('adresse') || 'non fournie'),
+      'Type de travaux : ' + valeur('type'),
+      '',
+      'Le projet :',
+      valeur('projet'),
+      '',
+      '(Pensez à joindre vos photos à ce courriel avant de l\'envoyer.)'
+    ];
+
+    var sujet = 'Demande de soumission · ' + valeur('type') + ' · ' + valeur('nom');
+    window.location.href = 'mailto:' + DEST +
+      '?subject=' + encodeURIComponent(sujet) +
+      '&body=' + encodeURIComponent(lignes.join('\n'));
+  });
+
+  /* Le message d'erreur disparait des que la personne corrige : le laisser
+     affiche pendant qu'elle tape est une facon de la punir deux fois. */
+  form.addEventListener('input', function () {
+    if (!erreur.hidden) erreur.hidden = true;
+  });
+})();
+</script>
+</body>
+</html>
