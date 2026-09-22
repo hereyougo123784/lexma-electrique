@@ -514,7 +514,10 @@
     border-bottom-color: var(--sc-accent);
     box-shadow: 0 1px 0 0 var(--sc-accent);
   }
-  .lx-field ::placeholder { color: color-mix(in oklab, var(--sc-ink-soft) 70%, transparent); }
+  /* Le texte d'invite est du texte : il doit passer le seuil de contraste
+     comme le reste. A 70 % de transparence il tombait a 3,9:1 sur le fond de
+     cette section, sous le minimum de 4,5. */
+  .lx-field ::placeholder { color: color-mix(in oklab, var(--sc-ink-soft) 90%, transparent); }
   /* :user-invalid et non :invalid : un champ vide qu'on n'a pas encore touche
      n'est pas une erreur, et le peindre en rouge des le chargement est la
      facon la plus sure de faire fuir quelqu'un. */

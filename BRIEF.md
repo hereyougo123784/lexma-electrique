@@ -414,7 +414,17 @@ pas besoin : c'est du texte long, et le texte long se lit en colonne.
 
 ## Ce qui a été vérifié, et comment
 
-- **Contraste, mesuré sur le composite réel.** La photo est redessinée dans un
+- **Contraste, mesuré à travers un canvas.** La page utilise `color-mix()`
+  à plusieurs endroits, et `color-mix` se calcule en `oklab()`. Un analyseur
+  qui lit les trois premiers nombres d'une couleur comme du RGB lit donc L, a
+  et b, ce qui donne des résultats absurdes : c'est ce qui a d'abord fait
+  passer le texte d'invite du formulaire pour un échec à 1,19 alors qu'il était
+  à 3,9, puis pour un succès une fois corrigé. La mesure se fait maintenant en
+  peignant la couleur sur un canvas d'un pixel et en relisant le pixel, ce qui
+  résout n'importe quelle syntaxe. **169 éléments de texte mesurés sur les deux
+  pages, aucun échec**, y compris les états normalement cachés (message
+  d'erreur, bloc de confirmation) et les textes d'invite des champs.
+- **Contraste sur les photographies, mesuré sur le composite réel.** La photo est redessinée dans un
   canvas avec le même `object-fit: cover` et le même `object-position` que la
   page, le dégradé est reconstruit par-dessus, puis on échantillonne le pixel
   **le plus clair** sous chaque ligne de texte. Héros : 7,2 / 11,0 / 15,3 /
