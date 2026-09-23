@@ -178,14 +178,32 @@ la protection des renseignements personnels dans le secteur privé. Faites-la
 relire si vous voulez une garantie sur la conformité de l'entreprise dans son
 ensemble, qui déborde largement du site web.
 
+## Si le site change d'adresse
+
+Trois métadonnées sont écrites en adresse absolue, parce qu'un robot d'aperçu
+de lien ne résout pas les chemins relatifs : l'URL canonique, les balises
+Open Graph et les données structurées. Le jour où le site passe sur un nom de
+domaine, c'est un remplacement de texte sur une seule chaîne :
+
+```bash
+cd scrollcraft/builds/lexma-electrique
+sed -i '' 's|https://hereyougo123784.github.io/lexma-electrique/|https://votre-domaine.ca/|g' \
+  index.html confidentialite.html robots.txt sitemap.xml
+```
+
+Tout le reste de la page est en chemins relatifs et suit sans rien faire.
+
 ## Structure
 
 ```
 index.html            la page
 confidentialite.html  la politique de confidentialité et de témoins
+robots.txt            ouvre le site aux moteurs, pointe le plan
+sitemap.xml           le plan du site, deux pages
 scrollcraft.css       le moteur : jetons et styles. Ne pas modifier
 scrollcraft.js        le moteur : mécanique de scroll. Ne pas modifier
-assets/               le logo et les photographies
+assets/               le logo, les photographies, l'image de partage
+                      et les icônes d'écran d'accueil
 assets/fonts/         Archivo et Geist, hébergées localement
 BRIEF.md          le brief créatif : grammaire, courbe, sommet, partition
 ```

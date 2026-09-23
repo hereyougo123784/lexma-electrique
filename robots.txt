@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hereyougo123784.github.io/lexma-electrique/sitemap.xml
