@@ -5,29 +5,77 @@ Saint-Ambroise, membre de la CMEQ. Page unique en défilement, construite avec
 le skill [scroll-craft](../../../.agents/skills/scroll-craft/SKILL.md) :
 HTML, CSS et JavaScript purs, sans framework ni étape de build.
 
-## Mise en ligne
+## Mise en ligne sur Hostinger
 
-Le site vit dans le dépôt `claude-webb`, sous
-`scrollcraft/builds/lexma-electrique/`, et il est publié dans son **propre
-dépôt** où il occupe la racine, ce dont GitHub Pages a besoin. Il n'y a pas
-de copie : le dossier de travail reste la seule source, et `git subtree`
-republie ce qu'il contient.
+Le site est un dossier de fichiers statiques. Il n'a besoin ni de base de
+données, ni de PHP, ni d'étape de compilation.
 
-**La première fois**, créer un dépôt GitHub vide nommé `lexma-electrique`,
-sans README, sans .gitignore, sans licence. Puis :
+### La méthode Git, à faire une fois
+
+Dans hPanel, **votre site → Avancé → GIT** :
+
+| Champ | Valeur |
+|---|---|
+| Repository | `https://github.com/hereyougo123784/lexma-electrique.git` |
+| Branch | `main` |
+| Directory | laisser vide, ce qui déploie dans `public_html` |
+
+**Create**, puis **Deploy**. Deux choses font échouer ce premier déploiement :
+`public_html` doit être **vide** (supprimez le `index.html` de démonstration
+que Hostinger y dépose), et le **SSL gratuit** doit être activé dans
+hPanel → Sécurité.
+
+Pour que chaque `git push` se déploie tout seul, copiez l'URL de webhook que
+Hostinger affiche à côté du dépôt, puis dans GitHub → dépôt → **Settings →
+Webhooks → Add webhook** : collez l'URL, type `application/json`, « Just the
+push event ».
+
+### Ce que `.htaccess` fait pour vous
+
+Hostinger tourne sur LiteSpeed, qui lit ce fichier comme Apache. Il est déjà
+dans le dépôt et s'applique tout seul :
+
+- **une seule adresse canonique** : le `http` et le `www` redirigent en une
+  seule étape vers `https://lexma-electrique.com` ;
+- **compression** du HTML, du CSS et du JavaScript, pas des images ni des
+  polices, qui sont déjà compressées ;
+- **cache** calibré sur ce qui change : un an pour les polices, une semaine
+  pour les photos, un jour pour les styles, **jamais pour le HTML**, parce que
+  c'est là que vivent vos coordonnées ;
+- **page 404** dans la langue du site, avec le numéro de téléphone ;
+- deux en-têtes de sécurité, et le listage des dossiers désactivé.
+
+Si vous déployez par ZIP plutôt que par Git, attention : `.htaccess` commence
+par un point et beaucoup de gestionnaires de fichiers le cachent par défaut.
+Vérifiez qu'il est bien arrivé dans `public_html`.
+
+### Le nom de domaine
+
+Tout le site pointe vers **`https://lexma-electrique.com`** : l'URL canonique,
+les balises de partage, les données structurées, le plan du site et la
+redirection du formulaire. Ce domaine est le vôtre, le courriel `gestion@` y
+est hébergé chez Microsoft 365, et il n'affiche aujourd'hui qu'une page de
+stationnement de registraire.
+
+Pour une autre adresse, c'est un seul remplacement de texte :
 
 ```bash
-git -C /Users/jg/claude subtree push --prefix=scrollcraft/builds/lexma-electrique lexma main
+cd scrollcraft/builds/lexma-electrique
+sed -i '' 's|https://lexma-electrique.com|https://autre-domaine.ca|g' \
+  index.html confidentialite.html robots.txt sitemap.xml .htaccess
 ```
 
-Ensuite, dans le dépôt sur GitHub : Settings → Pages → Source « Deploy from a
-branch » → Branch `main`, dossier `/ (root)` → Save. Le site paraît à
-`https://hereyougo123784.github.io/lexma-electrique/` en une minute ou deux.
+### Après la mise en ligne
 
-**Ensuite**, à chaque modification, c'est la même commande. Le dépôt distant
-`lexma` est déjà configuré.
+1. **Déclenchez le formulaire une fois.** FormSubmit envoie un courriel de
+   confirmation à `gestion@lexma-electrique.com` avec un lien à cliquer. Tant
+   qu'il ne l'est pas, les demandes suivantes n'arrivent pas.
+2. **Testez le bouton d'appel depuis un vrai téléphone.** `tel:` et `mailto:`
+   ne se comportent pas pareil sur un appareil et dans un navigateur de bureau.
+3. **Soumettez le site à Google** : Search Console, propriété
+   `lexma-electrique.com`, puis déposez `sitemap.xml`.
 
-## Lancer en local
+## Lancer en local## Lancer en local
 
 Aucune dépendance à installer. Servez le dossier :
 
@@ -187,7 +235,7 @@ domaine, c'est un remplacement de texte sur une seule chaîne :
 
 ```bash
 cd scrollcraft/builds/lexma-electrique
-sed -i '' 's|https://hereyougo123784.github.io/lexma-electrique/|https://votre-domaine.ca/|g' \
+sed -i '' 's|https://lexma-electrique.com/|https://votre-domaine.ca/|g' \
   index.html confidentialite.html robots.txt sitemap.xml
 ```
 

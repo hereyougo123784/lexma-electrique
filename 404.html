@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Page introuvable | Lexma Électrique</title>
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#0A0D14">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230A0D14'/><path d='M18.6 4 11 17.4h5.1L13.4 28 21 14.6h-5.1z' fill='%23FFD21A'/></svg>">
+<link rel="apple-touch-icon" href="/assets/icone-180.png">
+<link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* ------------------------------------------------------- polices --
+     Archivo et Geist sont servies depuis ce dossier, pas depuis le CDN
+     de Google. Un lien vers ce CDN transmet l'adresse IP et le
+     navigateur de chaque visiteur a un tiers : c'etait le seul
+     transfert de donnees de tout le site, et la seule chose que la
+     politique de confidentialite aurait eu a declarer. Les deux
+     familles sont sous licence libre (OFL), donc les heberger soi-meme
+     est permis. Seul le latin est embarque : le francais n'a besoin de
+     rien d'autre, et ca fait une requete externe de moins.
+     -------------------------------------------------------------- */
+  @font-face {
+    font-family: 'Archivo';
+    font-style: normal;
+    font-weight: 400 900;
+    font-stretch: 75% 125%;
+    font-display: swap;
+    src: url('/assets/fonts/archivo-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+
+  /* Une page d'erreur reste une page du site : même sol, même typographie,
+     même numéro de téléphone. Quelqu'un qui tombe ici cherchait quelque
+     chose ; il doit pouvoir appeler sans repartir à zéro. */
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100svh;
+    display: grid; align-content: center;
+    padding: clamp(2rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4rem);
+    background: #0A0D14; color: #F3F5F9;
+    font-family: 'Geist', system-ui, sans-serif;
+    font-size: clamp(1rem, 0.96rem + 0.22vw, 1.08rem); line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: #FFD21A; color: #0A0D14; }
+  :focus-visible { outline: 2px solid #FFD21A; outline-offset: 3px; border-radius: 4px; }
+  .cadre { width: 100%; max-width: 44rem; margin-inline: auto; }
+  .code {
+    font-family: 'Geist', system-ui, sans-serif; font-weight: 600;
+    font-size: 0.82rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: #FFD21A; margin: 0 0 1.5rem;
+  }
+  h1 {
+    font-family: 'Archivo', system-ui, sans-serif; font-weight: 900;
+    font-size: clamp(2.2rem, 8vw, 5rem); line-height: 0.96;
+    letter-spacing: -0.04em; text-wrap: balance; margin: 0;
+  }
+  p { max-width: 46ch; color: #97A0B2; margin: 1.5rem 0 0; text-wrap: pretty; }
+  .liens { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem; }
+  .bouton {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 3.2rem; padding: 0 1.8rem;
+    font-family: 'Archivo', system-ui, sans-serif; font-weight: 800;
+    font-size: 1.05rem; letter-spacing: -0.015em;
+    border-radius: 6px; text-decoration: none; white-space: nowrap;
+    transition: transform 160ms cubic-bezier(.23,1,.32,1);
+  }
+  .bouton:active { transform: translateY(1px); }
+  .bouton--or { background: #FFD21A; color: #0A0D14; }
+  .bouton--nu { border: 1px solid rgba(243,245,249,.28); color: #F3F5F9; }
+  @media (hover: hover) and (pointer: fine) {
+    .bouton--or:hover { transform: translateY(-2px); }
+    .bouton--nu:hover { border-color: #FFD21A; color: #FFD21A; }
+  }
+  @media (max-width: 520px) { .liens { flex-direction: column; } .bouton { width: 100%; } }
+</style>
+</head>
+<body>
+  <main class="cadre">
+    <p class="code">Erreur 404</p>
+    <h1>Cette page n'existe pas.</h1>
+    <p>Le lien est peut-être vieux, ou il y a une coquille dans l'adresse. Le reste du site est à sa place, et le téléphone répond toujours.</p>
+    <div class="liens">
+      <a class="bouton bouton--or" href="tel:+14507567111">450 756-7111</a>
+      <a class="bouton bouton--nu" href="/">Retour au site</a>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,86 @@
+# ============================================================================
+#  Lexma Électrique — configuration du serveur
+#  Hostinger tourne sur LiteSpeed, qui lit ce fichier comme Apache.
+#  Il n'y a rien ici qui soit propre à un hébergeur : ce fichier suivra le
+#  site ailleurs sans modification.
+# ============================================================================
+
+# ---------------------------------------------------------------- adresse --
+# Une seule adresse canonique, en une seule redirection. Le http et le www
+# arrivent tous les deux sur https://lexma-electrique.com, ce qui est aussi
+# ce que déclare la balise canonical des pages. Deux adresses pour la même
+# page, c'est un site qui se fait concurrence à lui-même dans Google.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} ^www\. [NC]
+  RewriteRule ^ https://lexma-electrique.com%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# ------------------------------------------------------------------ 404 ----
+ErrorDocument 404 /404.html
+
+# ----------------------------------------------------------- compression --
+# Le texte se compresse de 70 à 80 %. Les images et les polices woff2 sont
+# déjà compressées : les repasser à la moulinette coûte du processeur pour
+# rien, parfois pour quelques octets de plus.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE application/xml image/svg+xml
+</IfModule>
+
+# ------------------------------------------------------------------ cache --
+# Les noms de fichiers ne portent pas d'empreinte, donc une photo remplacée
+# garde son nom. Les durées sont choisies en conséquence : longues pour ce
+# qui ne change jamais, courtes pour ce qui peut changer, nulles pour le HTML.
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Les polices ne changeront pas. Un an, et le navigateur ne redemande rien.
+  ExpiresByType font/woff2                 "access plus 1 year"
+
+  # Photographies et icônes : une semaine. Assez pour la vitesse, assez court
+  # pour qu'une photo remplacée arrive sans que personne vide son cache.
+  ExpiresByType image/jpeg                 "access plus 7 days"
+  ExpiresByType image/png                  "access plus 7 days"
+  ExpiresByType image/svg+xml              "access plus 7 days"
+
+  # Le moteur et ses styles : une journée. Un correctif ne met jamais plus
+  # de 24 heures à rejoindre un visiteur déjà venu.
+  ExpiresByType text/css                   "access plus 1 day"
+  ExpiresByType application/javascript     "access plus 1 day"
+
+  # Le HTML, jamais. Le contenu, les coordonnées et les prix vivent là.
+  ExpiresByType text/html                  "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Deux en-têtes de sécurité, sans risque pour un site statique.
+  # nosniff : le navigateur respecte le type déclaré au lieu de deviner.
+  # Referrer-Policy : un lien sortant ne révèle pas la page d'où il part.
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ------------------------------------------------------------------ types --
+# Certains serveurs ne connaissent pas encore woff2 et l'envoient en
+# application/octet-stream, ce que le navigateur refuse de traiter comme une
+# police. La ligne ne coûte rien et évite une page sans typographie.
+<IfModule mod_mime.c>
+  AddType font/woff2 .woff2
+  AddType image/svg+xml .svg
+  AddType application/manifest+json .webmanifest
+</IfModule>
+
+# ------------------------------------------------------------- discretion --
+# Le listage de répertoire montrerait le contenu de /assets à qui devine
+# l'adresse. Rien de secret ne s'y trouve, mais rien n'oblige à l'exposer.
+Options -Indexes
